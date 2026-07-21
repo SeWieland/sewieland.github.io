@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Transiever — server-side mail rules</title>
+  <meta name="description" content="Small tools for moving and managing email rules on the server with Sieve and ManageSieve.">
+  <link rel="canonical" href="https://sewieland.github.io/transiever/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Transiever — server-side mail rules">
+  <meta property="og:description" content="Small tools for moving and managing email rules on the server with Sieve and ManageSieve.">
+  <meta property="og:url" content="https://sewieland.github.io/transiever/">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="wordmark" href="/transiever/">Transiever</a>
+      <a class="quiet-link" href="/">Sebastian Wieland</a>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-heading">
+        <h1 id="hero-heading">Put mail rules where the mail arrives.</h1>
+        <p>
+          Transiever is a small family of open-source tools for moving and managing
+          email rules on the server with Sieve and ManageSieve.
+        </p>
+      </section>
+
+      <section aria-labelledby="tools-heading">
+        <h2 id="tools-heading">Choose the tool that fits</h2>
+        <div class="tool-grid">
+          <article class="tool">
+            <p class="tool-meta">Windows x64</p>
+            <h3><a href="https://github.com/SeWieland/Transiever.OutlookResiever">olrx</a></h3>
+            <p>Move supported classic Outlook receive rules to server-side Sieve.</p>
+          </article>
+
+          <article class="tool">
+            <p class="tool-meta">Windows and Linux</p>
+            <h3><a href="https://github.com/SeWieland/Transiever.SieveRuler">srtx</a></h3>
+            <p>Generate, preview, deploy, and roll back provider-neutral JSON rules.</p>
+          </article>
+
+          <article class="tool">
+            <p class="tool-meta">Windows and Linux</p>
+            <h3><a href="https://github.com/SeWieland/Transiever.ManageSieve">msieve</a></h3>
+            <p>Inspect and manage server-side Sieve scripts directly through ManageSieve.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="install-section" aria-labelledby="install-heading">
+        <h2 id="install-heading">Install</h2>
+        <div class="install-grid">
+          <div>
+            <h3>Windows with <a href="https://github.com/SeWieland/Transiever.ScoopBucket">Scoop</a></h3>
+            <pre><code>scoop bucket add transiever https://github.com/SeWieland/Transiever.ScoopBucket
+scoop install transiever/olrx
+scoop install transiever/srtx
+scoop install transiever/msieve</code></pre>
+          </div>
+          <div>
+            <h3>Linux x64 with <a href="https://github.com/SeWieland/homebrew-transiever">Homebrew</a></h3>
+            <pre><code>brew install SeWieland/transiever/srtx
+brew install SeWieland/transiever/msieve</code></pre>
+            <p class="note"><code>olrx</code> requires classic Outlook for Windows.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="relationship" aria-labelledby="relationship-heading">
+        <h2 id="relationship-heading">How the pieces fit</h2>
+        <p class="flow" aria-label="OutlookResiever uses SieveRuler, which uses ManageSieve">
+          <code>OutlookResiever</code> → <code>SieveRuler</code> → <code>ManageSieve</code>
+        </p>
+        <p>
+          Start with <code>olrx</code> for Outlook, <code>srtx</code> for portable rules,
+          or <code>msieve</code> for direct protocol operations.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      A personal open-source project by
+      <a href="https://github.com/SeWieland">Sebastian Wieland</a>.
+      <a href="https://github.com/SeWieland/Transiever.SieveRuler/blob/main/LICENSE">MIT licensed</a>.
+    </footer>
+  </div>
+</body>
+</html>
