@@ -4,11 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Transiever — server-side mail rules</title>
-  <meta name="description" content="Small tools for moving and managing email rules on the server with Sieve and ManageSieve.">
+  <meta name="description" content="Small tools for syncing and managing email rules on the server with Sieve and ManageSieve.">
   <link rel="canonical" href="https://sewieland.github.io/transiever/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Transiever — server-side mail rules">
-  <meta property="og:description" content="Small tools for moving and managing email rules on the server with Sieve and ManageSieve.">
+  <meta property="og:description" content="Small tools for syncing and managing email rules on the server with Sieve and ManageSieve.">
   <meta property="og:url" content="https://sewieland.github.io/transiever/">
   <link rel="stylesheet" href="/styles.css">
 </head>
@@ -23,7 +23,7 @@
       <section class="hero" aria-labelledby="hero-heading">
         <h1 id="hero-heading">Put mail rules where the mail arrives.</h1>
         <p>
-          Transiever is a small family of open-source tools for moving and managing
+          Transiever is a small family of open-source tools for syncing and managing
           email rules on the server with Sieve and ManageSieve.
         </p>
       </section>
@@ -34,13 +34,13 @@
           <article class="tool">
             <p class="tool-meta">Windows x64</p>
             <h3><a href="https://github.com/SeWieland/Transiever.OutlookResiever">olrx</a></h3>
-            <p>Move supported classic Outlook receive rules to server-side Sieve.</p>
+            <p>Sync supported classic Outlook receive rules to server-side Sieve.</p>
           </article>
 
           <article class="tool">
             <p class="tool-meta">Windows and Linux · Beta</p>
             <h3><a href="https://github.com/SeWieland/Transiever.ThunderbirdResiever">tbrx</a></h3>
-            <p>Move supported Thunderbird filters to server-side Sieve without requiring Thunderbird.</p>
+            <p>Sync supported Thunderbird filters to server-side Sieve.</p>
             <p class="tester-link">
               <a href="https://github.com/SeWieland/Transiever.ThunderbirdResiever/issues">Unstable beta — testers wanted</a>
             </p>
@@ -81,18 +81,46 @@ brew install SeWieland/transiever/msieve</code></pre>
         </div>
       </section>
 
+      <section class="sync-section" aria-labelledby="sync-heading">
+        <h2 id="sync-heading">Sync in one command</h2>
+        <p class="section-intro">Set your ManageSieve connection once, then run the adapter for your mail client.</p>
+        <pre><code>TRANSIEVER_SIEVE_HOST=sieve.example.com
+TRANSIEVER_SIEVE_USERNAME=user@example.com
+TRANSIEVER_SIEVE_PASSWORD=secret
+
+olrx run  # Outlook
+tbrx run  # Thunderbird</code></pre>
+        <p class="note">Both commands preview the result and ask before deploying.</p>
+      </section>
+
       <section class="relationship" aria-labelledby="relationship-heading">
         <h2 id="relationship-heading">How the pieces fit</h2>
-        <div class="flow" role="img" aria-label="OutlookResiever and ThunderbirdResiever both use SieveRuler, which uses ManageSieve">
-          <span class="flow-sources"><code>OutlookResiever</code><code>ThunderbirdResiever</code></span>
-          <span aria-hidden="true">→</span>
-          <code>SieveRuler</code>
-          <span aria-hidden="true">→</span>
-          <code>ManageSieve</code>
+        <div class="pipeline">
+          <div class="pipeline-stage">
+            <p class="pipeline-label">Rule sources</p>
+            <div class="pipeline-options">
+              <div class="flow-node"><strong>Classic Outlook</strong><code>olrx</code></div>
+              <div class="flow-node"><strong>Thunderbird</strong><code>tbrx</code></div>
+            </div>
+          </div>
+          <span class="flow-arrow" aria-hidden="true">→</span>
+          <div class="pipeline-stage flow-node pipeline-core">
+            <p class="pipeline-label">Shared sync pipeline</p>
+            <strong>SieveRuler</strong>
+            <span>Reconcile · preview · backup · rollback</span>
+            <strong>ManageSieve</strong>
+            <span>Provider-neutral server connection</span>
+          </div>
+          <span class="flow-arrow" aria-hidden="true">→</span>
+          <div class="pipeline-stage flow-node">
+            <p class="pipeline-label">Your provider</p>
+            <strong>Mail server</strong>
+            <span>Server-side Sieve rules</span>
+          </div>
         </div>
         <p>
-          Start with <code>olrx</code> for Outlook, <code>tbrx</code> for Thunderbird,
-          <code>srtx</code> for portable rules, or <code>msieve</code> for direct protocol operations.
+          Source adapters translate client rules into one shared model.
+          The same provider-neutral pipeline then reconciles and syncs them to any compatible server.
         </p>
       </section>
     </main>

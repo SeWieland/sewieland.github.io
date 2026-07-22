@@ -192,21 +192,63 @@ pre {
   font-size: 0.92rem;
 }
 
-.flow {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-bottom: 1rem;
-  padding: 1.25rem;
-  background: var(--surface);
-  border-left: 4px solid var(--accent);
-  font-size: clamp(1rem, 3vw, 1.25rem);
+.section-intro {
+  max-width: 42rem;
+  color: var(--muted);
 }
 
-.flow-sources {
+.pipeline {
   display: grid;
-  gap: 0.25rem;
+  grid-template-columns: minmax(0, 1.3fr) auto minmax(0, 1.4fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.pipeline-options,
+.flow-node {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.flow-node {
+  min-width: 0;
+  padding: 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.pipeline-core {
+  border-color: var(--accent);
+  box-shadow: inset 4px 0 0 var(--accent);
+}
+
+.pipeline-core strong:not(:first-of-type) {
+  margin-top: 0.75rem;
+}
+
+.pipeline-label {
+  margin-bottom: 0.65rem;
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.flow-node .pipeline-label {
+  margin-bottom: 0.35rem;
+}
+
+.flow-node span {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.flow-arrow {
+  color: var(--accent);
+  font-size: 1.5rem;
+  font-weight: 700;
 }
 
 .relationship > p:last-child {
@@ -231,6 +273,19 @@ footer {
   .hero {
     padding-block: 4rem;
   }
+
+  .pipeline {
+    grid-template-columns: 1fr;
+  }
+
+  .pipeline-options {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .flow-arrow {
+    justify-self: center;
+    transform: rotate(90deg);
+  }
 }
 
 @media (max-width: 28rem) {
@@ -241,5 +296,9 @@ footer {
   .site-header {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .pipeline-options {
+    grid-template-columns: 1fr;
   }
 }
