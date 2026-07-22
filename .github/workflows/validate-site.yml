@@ -1,0 +1,58 @@
+name: Validate site
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate site
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Reject whitespace errors
+        run: |
+          ! git grep -nI -E '[[:blank:]]+$'
+          ! git grep -nI $'\r'
+
+      - name: Parse HTML and verify local links
+        run: |
+          python3 - <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+          from urllib.parse import unquote, urlsplit
+
+          root = Path.cwd().resolve()
+
+          class LinkParser(HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.links = []
+
+              def handle_starttag(self, tag, attrs):
+                  if tag in {"a", "link", "script", "img"}:
+                      self.links.extend(value for name, value in attrs if name in {"href", "src"} and value)
+
+          for page in root.rglob("*.html"):
+              parser = LinkParser()
+              parser.feed(page.read_text(encoding="utf-8"))
+              parser.close()
+              for link in parser.links:
+                  parsed = urlsplit(link)
+                  if parsed.scheme or parsed.netloc or link.startswith("#"):
+                      continue
+                  relative = unquote(parsed.path)
+                  target = (root / relative.lstrip("/")) if relative.startswith("/") else (page.parent / relative)
+                  target = target.resolve()
+                  if root not in target.parents and target != root:
+                      raise SystemExit(f"{page.relative_to(root)} links outside the site: {link}")
+                  if target.is_dir():
+                      target /= "index.html"
+                  if not target.is_file():
+                      raise SystemExit(f"{page.relative_to(root)} has a missing local link: {link}")
+          PY
