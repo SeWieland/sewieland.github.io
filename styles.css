@@ -148,6 +148,7 @@ main > section:not(.hero) {
   padding: 1.5rem;
   background: var(--surface);
   border: 1px solid var(--border);
+  border-radius: 0.75rem;
 }
 
 .tool p:last-child {
@@ -183,6 +184,7 @@ pre {
   color: var(--text);
   background: var(--surface);
   border: 1px solid var(--border);
+  border-radius: 0.75rem;
   line-height: 1.55;
 }
 
@@ -200,9 +202,13 @@ pre {
 .pipeline {
   display: grid;
   grid-template-columns: minmax(0, 1.3fr) auto minmax(0, 1.4fr) auto minmax(0, 1fr);
-  align-items: center;
+  align-items: start;
   gap: 1rem;
   margin-bottom: 1.5rem;
+}
+
+.pipeline > .flow-node {
+  margin-top: 1.7rem;
 }
 
 .pipeline-options,
@@ -216,6 +222,7 @@ pre {
   padding: 1.25rem;
   background: var(--surface);
   border: 1px solid var(--border);
+  border-radius: 0.75rem;
 }
 
 .pipeline-core {
@@ -246,6 +253,7 @@ pre {
 }
 
 .flow-arrow {
+  align-self: center;
   color: var(--accent);
   font-size: 1.5rem;
   font-weight: 700;
@@ -276,6 +284,10 @@ footer {
 
   .pipeline {
     grid-template-columns: 1fr;
+  }
+
+  .pipeline > .flow-node {
+    margin-top: 0;
   }
 
   .pipeline-options {

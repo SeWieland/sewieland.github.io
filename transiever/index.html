@@ -21,26 +21,49 @@
 
     <main>
       <section class="hero" aria-labelledby="hero-heading">
-        <h1 id="hero-heading">Put mail rules where the mail arrives.</h1>
+        <h1 id="hero-heading">Keep mail rules close to your mail.</h1>
         <p>
-          Transiever is a small family of open-source tools for syncing and managing
-          email rules on the server with Sieve and ManageSieve.
+          Turn familiar Outlook and Thunderbird filters into server-side Sieve rules.
+          Preview every change before it reaches your inbox.
         </p>
       </section>
 
+      <section aria-labelledby="provider-heading">
+        <h2 id="provider-heading">Works with your mail provider</h2>
+        <div class="tool-grid">
+          <article class="tool">
+            <p class="tool-meta">Validated</p>
+            <h3><a href="https://kb.mailbox.org/en/private/e-mail/can-i-use-sieve-mail-filtering/">mailbox.org</a></h3>
+            <p>Validated with mailbox.org and its Open-Xchange rule editor.</p>
+          </article>
+
+          <article class="tool">
+            <p class="tool-meta">Documented ManageSieve</p>
+            <h3>More providers to try</h3>
+            <p>
+              Also worth trying: <a href="https://migadu.com/">Migadu</a>,
+              <a href="https://purelymail.com/docs/setup/technical">Purelymail</a>, and
+              self-hosted <a href="https://doc.dovecot.org/2.4.0/core/config/sieve/managesieve.html">Dovecot/Pigeonhole</a>.
+            </p>
+          </article>
+        </div>
+        <p class="note">ManageSieve capabilities and webmail-rule-editor behavior vary by provider; preview before deploying.</p>
+      </section>
+
       <section aria-labelledby="tools-heading">
-        <h2 id="tools-heading">Choose the tool that fits</h2>
+        <h2 id="tools-heading">Start where you are</h2>
+        <p class="section-intro">Bring rules from your mail client, or work directly with the server when you need to.</p>
         <div class="tool-grid">
           <article class="tool">
             <p class="tool-meta">Windows x64</p>
             <h3><a href="https://github.com/SeWieland/Transiever.OutlookResiever">olrx</a></h3>
-            <p>Sync supported classic Outlook receive rules to server-side Sieve.</p>
+            <p>Bring supported classic Outlook receive rules to your mail server.</p>
           </article>
 
           <article class="tool">
             <p class="tool-meta">Windows and Linux · Beta</p>
             <h3><a href="https://github.com/SeWieland/Transiever.ThunderbirdResiever">tbrx</a></h3>
-            <p>Sync supported Thunderbird filters to server-side Sieve.</p>
+            <p>Bring supported Thunderbird filters to your mail server.</p>
             <p class="tester-link">
               <a href="https://github.com/SeWieland/Transiever.ThunderbirdResiever/issues">Unstable beta — testers wanted</a>
             </p>
@@ -49,19 +72,19 @@
           <article class="tool">
             <p class="tool-meta">Windows and Linux</p>
             <h3><a href="https://github.com/SeWieland/Transiever.SieveRuler">srtx</a></h3>
-            <p>Generate, preview, deploy, and roll back provider-neutral JSON rules.</p>
+            <p>Build, preview, and safely update server rules from a simple JSON file.</p>
           </article>
 
           <article class="tool">
             <p class="tool-meta">Windows and Linux</p>
             <h3><a href="https://github.com/SeWieland/Transiever.ManageSieve">msieve</a></h3>
-            <p>Inspect and manage server-side Sieve scripts directly through ManageSieve.</p>
+            <p>Inspect and manage server-side Sieve scripts when you need direct control.</p>
           </article>
         </div>
       </section>
 
       <section class="install-section" aria-labelledby="install-heading">
-        <h2 id="install-heading">Install</h2>
+        <h2 id="install-heading">Install your tools</h2>
         <div class="install-grid">
           <div>
             <h3>Windows with <a href="https://github.com/SeWieland/Transiever.ScoopBucket">Scoop</a></h3>
@@ -82,7 +105,7 @@ brew install SeWieland/transiever/msieve</code></pre>
       </section>
 
       <section class="sync-section" aria-labelledby="sync-heading">
-        <h2 id="sync-heading">Sync in one command</h2>
+        <h2 id="sync-heading">Sync with confidence</h2>
         <p class="section-intro">Set your ManageSieve connection once, then run the adapter for your mail client.</p>
         <pre><code>TRANSIEVER_SIEVE_HOST=sieve.example.com
 TRANSIEVER_SIEVE_USERNAME=user@example.com
@@ -90,11 +113,11 @@ TRANSIEVER_SIEVE_PASSWORD=secret
 
 olrx run  # Outlook
 tbrx run  # Thunderbird</code></pre>
-        <p class="note">Both commands preview the result and ask before deploying.</p>
+        <p class="note">Both commands show the result and ask before changing your server rules.</p>
       </section>
 
       <section class="relationship" aria-labelledby="relationship-heading">
-        <h2 id="relationship-heading">How the pieces fit</h2>
+        <h2 id="relationship-heading">A simple path to server-side rules</h2>
         <div class="pipeline">
           <div class="pipeline-stage">
             <p class="pipeline-label">Rule sources</p>
@@ -119,8 +142,7 @@ tbrx run  # Thunderbird</code></pre>
           </div>
         </div>
         <p>
-          Source adapters translate client rules into one shared model.
-          The same provider-neutral pipeline then reconciles and syncs them to any compatible server.
+          Your client rules go through one shared pipeline, then become server-side rules on a compatible mail server.
         </p>
       </section>
     </main>
