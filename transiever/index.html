@@ -38,6 +38,15 @@
           </article>
 
           <article class="tool">
+            <p class="tool-meta">Windows and Linux · Beta</p>
+            <h3><a href="https://github.com/SeWieland/Transiever.ThunderbirdResiever">tbrx</a></h3>
+            <p>Move supported Thunderbird filters to server-side Sieve without requiring Thunderbird.</p>
+            <p class="tester-link">
+              <a href="https://github.com/SeWieland/Transiever.ThunderbirdResiever/issues">Unstable beta — testers wanted</a>
+            </p>
+          </article>
+
+          <article class="tool">
             <p class="tool-meta">Windows and Linux</p>
             <h3><a href="https://github.com/SeWieland/Transiever.SieveRuler">srtx</a></h3>
             <p>Generate, preview, deploy, and roll back provider-neutral JSON rules.</p>
@@ -58,12 +67,14 @@
             <h3>Windows with <a href="https://github.com/SeWieland/Transiever.ScoopBucket">Scoop</a></h3>
             <pre><code>scoop bucket add transiever https://github.com/SeWieland/Transiever.ScoopBucket
 scoop install transiever/olrx
+scoop install transiever/tbrx
 scoop install transiever/srtx
 scoop install transiever/msieve</code></pre>
           </div>
           <div>
             <h3>Linux x64 with <a href="https://github.com/SeWieland/homebrew-transiever">Homebrew</a></h3>
-            <pre><code>brew install SeWieland/transiever/srtx
+            <pre><code>brew install SeWieland/transiever/tbrx
+brew install SeWieland/transiever/srtx
 brew install SeWieland/transiever/msieve</code></pre>
             <p class="note"><code>olrx</code> requires classic Outlook for Windows.</p>
           </div>
@@ -72,12 +83,16 @@ brew install SeWieland/transiever/msieve</code></pre>
 
       <section class="relationship" aria-labelledby="relationship-heading">
         <h2 id="relationship-heading">How the pieces fit</h2>
-        <p class="flow" aria-label="OutlookResiever uses SieveRuler, which uses ManageSieve">
-          <code>OutlookResiever</code> → <code>SieveRuler</code> → <code>ManageSieve</code>
-        </p>
+        <div class="flow" role="img" aria-label="OutlookResiever and ThunderbirdResiever both use SieveRuler, which uses ManageSieve">
+          <span class="flow-sources"><code>OutlookResiever</code><code>ThunderbirdResiever</code></span>
+          <span aria-hidden="true">→</span>
+          <code>SieveRuler</code>
+          <span aria-hidden="true">→</span>
+          <code>ManageSieve</code>
+        </div>
         <p>
-          Start with <code>olrx</code> for Outlook, <code>srtx</code> for portable rules,
-          or <code>msieve</code> for direct protocol operations.
+          Start with <code>olrx</code> for Outlook, <code>tbrx</code> for Thunderbird,
+          <code>srtx</code> for portable rules, or <code>msieve</code> for direct protocol operations.
         </p>
       </section>
     </main>
