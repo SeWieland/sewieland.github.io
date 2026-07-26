@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Transiever — server-side mail rules</title>
-  <meta name="description" content="Small tools for syncing and managing email rules on the server with Sieve and ManageSieve.">
+  <title>Transiever — Sieve and ManageSieve tools</title>
+  <meta name="description" content="Export supported Outlook and Thunderbird rules as Sieve scripts, or sync them through ManageSieve.">
   <link rel="canonical" href="https://sewieland.github.io/transiever/">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Transiever — server-side mail rules">
-  <meta property="og:description" content="Small tools for syncing and managing email rules on the server with Sieve and ManageSieve.">
+  <meta property="og:title" content="Transiever — Sieve and ManageSieve tools">
+  <meta property="og:description" content="Export supported Outlook and Thunderbird rules as Sieve scripts, or sync them through ManageSieve.">
   <meta property="og:url" content="https://sewieland.github.io/transiever/">
   <link rel="stylesheet" href="/styles.css">
 </head>
@@ -23,8 +23,8 @@
       <section class="hero" aria-labelledby="hero-heading">
         <h1 id="hero-heading">Keep mail rules close to your mail.</h1>
         <p>
-          Turn familiar Outlook and Thunderbird filters into server-side Sieve rules.
-          Preview every change before it reaches your inbox.
+          Turn supported Outlook and Thunderbird filters into Sieve scripts.
+          Sync them to your mail server with ManageSieve when it is available.
         </p>
       </section>
 
@@ -52,7 +52,7 @@
 
       <section aria-labelledby="tools-heading">
         <h2 id="tools-heading">Start where you are</h2>
-        <p class="section-intro">Bring rules from your mail client, or work directly with the server when you need to.</p>
+        <p class="section-intro">Bring rules from your mail client, generate a Sieve script, or work directly with the server.</p>
         <div class="tool-grid">
           <article class="tool">
             <p class="tool-meta">Windows x64</p>
@@ -72,13 +72,13 @@
           <article class="tool">
             <p class="tool-meta">Windows and Linux</p>
             <h3><a href="https://github.com/SeWieland/Transiever.SieveRuler">srtx</a></h3>
-            <p>Build, preview, and safely update server rules from a simple JSON file.</p>
+            <p>Generate a Sieve script from a rule file, or preview and safely deploy it through ManageSieve.</p>
           </article>
 
           <article class="tool">
             <p class="tool-meta">Windows and Linux</p>
             <h3><a href="https://github.com/SeWieland/Transiever.ManageSieve">msieve</a></h3>
-            <p>Inspect and manage server-side Sieve scripts when you need direct control.</p>
+            <p>ManageSieve client for listing, downloading, checking, uploading, and activating Sieve scripts.</p>
           </article>
         </div>
       </section>
@@ -104,6 +104,14 @@ brew install SeWieland/transiever/msieve</code></pre>
         </div>
       </section>
 
+      <section aria-labelledby="export-heading">
+        <h2 id="export-heading">Export a Sieve script</h2>
+        <p class="section-intro">No ManageSieve? Export supported rules to a local Sieve script for a provider that accepts one.</p>
+        <pre><code>olrx export --rules outlook-rules.json
+srtx generate --rules outlook-rules.json --sieve outlook.sieve</code></pre>
+        <p class="note">For Thunderbird, use <code>tbrx export</code> to create the rules file, then run the same <code>srtx generate</code> step. This workflow reads local client rules and writes local files; it needs no server credentials or ManageSieve connection.</p>
+      </section>
+
       <section class="sync-section" aria-labelledby="sync-heading">
         <h2 id="sync-heading">Sync with confidence</h2>
         <p class="section-intro">Set your ManageSieve connection once, then run the adapter for your mail client.</p>
@@ -117,7 +125,7 @@ tbrx run  # Thunderbird</code></pre>
       </section>
 
       <section class="relationship" aria-labelledby="relationship-heading">
-        <h2 id="relationship-heading">A simple path to server-side rules</h2>
+        <h2 id="relationship-heading">Sync through ManageSieve</h2>
         <div class="pipeline">
           <div class="pipeline-stage">
             <p class="pipeline-label">Rule sources</p>
@@ -142,7 +150,7 @@ tbrx run  # Thunderbird</code></pre>
           </div>
         </div>
         <p>
-          Your client rules go through one shared pipeline, then become server-side rules on a compatible mail server.
+          When ManageSieve is available, your client rules go through one shared pipeline to a compatible mail server.
         </p>
       </section>
     </main>
