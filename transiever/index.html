@@ -18,7 +18,9 @@
   <script type="application/ld+json">
     {"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://sewieland.github.io/transiever/#website","name":"Transiever","url":"https://sewieland.github.io/transiever/","publisher":{"@type":"Person","name":"Sebastian Wieland","url":"https://sewieland.github.io/"}},{"@type":"CollectionPage","@id":"https://sewieland.github.io/transiever/#webpage","url":"https://sewieland.github.io/transiever/","name":"Sieve and ManageSieve tools for Outlook, Thunderbird, and .NET","description":"Transiever tools for Sieve generation, ManageSieve operations, and mail-rule migration.","isPartOf":{"@id":"https://sewieland.github.io/transiever/#website"}},{"@type":"ItemList","name":"Transiever tools","itemListElement":[{"@type":"ListItem","position":1,"item":{"@type":"SoftwareSourceCode","name":"Transiever.OutlookResiever","codeRepository":"https://github.com/SeWieland/Transiever.OutlookResiever","programmingLanguage":"C#"}},{"@type":"ListItem","position":2,"item":{"@type":"SoftwareSourceCode","name":"Transiever.ThunderbirdResiever","codeRepository":"https://github.com/SeWieland/Transiever.ThunderbirdResiever","programmingLanguage":"C#"}},{"@type":"ListItem","position":3,"item":{"@type":"SoftwareSourceCode","name":"Transiever.SieveRuler","codeRepository":"https://github.com/SeWieland/Transiever.SieveRuler","programmingLanguage":"C#"}},{"@type":"ListItem","position":4,"item":{"@type":"SoftwareSourceCode","name":"Transiever.ManageSieve","codeRepository":"https://github.com/SeWieland/Transiever.ManageSieve","programmingLanguage":"C#"}}]}]}
   </script>
+  <script src="/theme.js"></script>
   <link rel="stylesheet" href="/styles.css">
+  <script defer src="/copy-code.js"></script>
 </head>
 <body>
   <div class="page-shell">
@@ -29,7 +31,18 @@
         <a href="#dotnet">.NET</a>
         <a href="/transiever/sieve-providers/">Providers</a>
       </nav>
-      <a class="quiet-link" href="/">Sebastian Wieland</a>
+      <div class="header-utilities">
+        <a class="quiet-link" href="/">Sebastian Wieland</a>
+        <button class="theme-toggle" type="button" aria-label="Dark mode" aria-pressed="false" hidden>
+          <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+          </svg>
+          <svg class="theme-icon theme-icon-moon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5 8.5 8.5 0 1 0 20.5 14.5Z"></path>
+          </svg>
+        </button>
+      </div>
     </header>
 
     <main>
@@ -91,17 +104,17 @@
         <div class="install-grid">
           <div>
             <h3>Windows with <a href="https://github.com/SeWieland/Transiever.ScoopBucket">Scoop</a></h3>
-            <pre><code>scoop bucket add transiever https://github.com/SeWieland/Transiever.ScoopBucket
-scoop install transiever/olrx
-scoop install transiever/tbrx
-scoop install transiever/srtx
-scoop install transiever/msieve</code></pre>
+            <pre><code class="language-shell"><span class="syntax-command">scoop</span> bucket add <span class="syntax-value">transiever</span> <span class="syntax-value">https://github.com/SeWieland/Transiever.ScoopBucket</span>
+<span class="syntax-command">scoop</span> install <span class="syntax-value">transiever/olrx</span>
+<span class="syntax-command">scoop</span> install <span class="syntax-value">transiever/tbrx</span>
+<span class="syntax-command">scoop</span> install <span class="syntax-value">transiever/srtx</span>
+<span class="syntax-command">scoop</span> install <span class="syntax-value">transiever/msieve</span></code></pre>
           </div>
           <div>
             <h3>Linux x64 with <a href="https://github.com/SeWieland/homebrew-transiever">Homebrew</a></h3>
-            <pre><code>brew install SeWieland/transiever/tbrx
-brew install SeWieland/transiever/srtx
-brew install SeWieland/transiever/msieve</code></pre>
+            <pre><code class="language-shell"><span class="syntax-command">brew</span> install <span class="syntax-value">SeWieland/transiever/tbrx</span>
+<span class="syntax-command">brew</span> install <span class="syntax-value">SeWieland/transiever/srtx</span>
+<span class="syntax-command">brew</span> install <span class="syntax-value">SeWieland/transiever/msieve</span></code></pre>
             <p class="note"><code>olrx</code> requires classic Outlook for Windows.</p>
           </div>
         </div>

@@ -18,7 +18,9 @@
   <script type="application/ld+json">
     {"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://sewieland.github.io/transiever/thunderbird-filters-to-sieve/#webpage","url":"https://sewieland.github.io/transiever/thunderbird-filters-to-sieve/","name":"Export Thunderbird filters to server-side Sieve","description":"Use tbrx to export supported Thunderbird filters from msgFilterRules.dat and optionally synchronize them through ManageSieve."},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Transiever","item":"https://sewieland.github.io/transiever/"},{"@type":"ListItem","position":2,"name":"Thunderbird filters to Sieve","item":"https://sewieland.github.io/transiever/thunderbird-filters-to-sieve/"}]},{"@type":"SoftwareSourceCode","name":"Transiever.ThunderbirdResiever","codeRepository":"https://github.com/SeWieland/Transiever.ThunderbirdResiever","programmingLanguage":"C#","runtimePlatform":".NET 10 for Windows and Linux"}]}
   </script>
+  <script src="/theme.js"></script>
   <link rel="stylesheet" href="/styles.css">
+  <script defer src="/copy-code.js"></script>
 </head>
 <body>
   <div class="page-shell">
@@ -29,7 +31,18 @@
         <a href="/transiever/#dotnet">.NET</a>
         <a href="/transiever/sieve-providers/">Providers</a>
       </nav>
-      <a class="quiet-link" href="/">Sebastian Wieland</a>
+      <div class="header-utilities">
+        <a class="quiet-link" href="/">Sebastian Wieland</a>
+        <button class="theme-toggle" type="button" aria-label="Dark mode" aria-pressed="false" hidden>
+          <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+          </svg>
+          <svg class="theme-icon theme-icon-moon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5 8.5 8.5 0 1 0 20.5 14.5Z"></path>
+          </svg>
+        </button>
+      </div>
     </header>
 
     <main>
@@ -51,17 +64,17 @@
 
       <section class="guide-content" aria-labelledby="start-heading">
         <h2 id="start-heading">Export or sync one account</h2>
-        <pre><code>tbrx export --profile /path/to/profile
-tbrx run --filters /path/to/msgFilterRules.dat --optimize balanced
-tbrx rollback</code></pre>
+        <pre><code class="language-shell"><span class="syntax-command">tbrx</span> export <span class="syntax-flag">--profile</span> <span class="syntax-value">/path/to/profile</span>
+<span class="syntax-command">tbrx</span> run <span class="syntax-flag">--filters</span> <span class="syntax-value">/path/to/msgFilterRules.dat</span> <span class="syntax-flag">--optimize</span> <span class="syntax-value">balanced</span>
+<span class="syntax-command">tbrx</span> rollback</code></pre>
         <p><code>tbrx run</code> previews the generated candidate and asks before changing server rules. It needs a ManageSieve-capable provider; <a href="/transiever/sieve-providers/">check provider requirements first</a>.</p>
       </section>
 
       <section class="guide-content" aria-labelledby="local-heading">
         <h2 id="local-heading">Generate a local Sieve file</h2>
         <p>For a provider that accepts a Sieve file but does not expose ManageSieve, combine Thunderbird export with <code>srtx</code>.</p>
-        <pre><code>tbrx export --profile /path/to/profile
-srtx generate --rules thunderbird-rules.json --sieve thunderbird.sieve</code></pre>
+        <pre><code class="language-shell"><span class="syntax-command">tbrx</span> export <span class="syntax-flag">--profile</span> <span class="syntax-value">/path/to/profile</span>
+<span class="syntax-command">srtx</span> generate <span class="syntax-flag">--rules</span> <span class="syntax-value">thunderbird-rules.json</span> <span class="syntax-flag">--sieve</span> <span class="syntax-value">thunderbird.sieve</span></code></pre>
         <p>Read the <a href="https://github.com/SeWieland/Transiever.ThunderbirdResiever">tbrx documentation</a> for supported formats, profile layouts, and the beta test scope.</p>
       </section>
     </main>

@@ -18,7 +18,9 @@
   <script type="application/ld+json">
     {"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://sewieland.github.io/transiever/outlook-rules-to-sieve/#webpage","url":"https://sewieland.github.io/transiever/outlook-rules-to-sieve/","name":"Convert classic Outlook rules to server-side Sieve","description":"Use olrx to export supported classic Outlook receive rules to Sieve and optionally synchronize through ManageSieve."},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Transiever","item":"https://sewieland.github.io/transiever/"},{"@type":"ListItem","position":2,"name":"Classic Outlook rules to Sieve","item":"https://sewieland.github.io/transiever/outlook-rules-to-sieve/"}]},{"@type":"SoftwareSourceCode","name":"Transiever.OutlookResiever","codeRepository":"https://github.com/SeWieland/Transiever.OutlookResiever","programmingLanguage":"C#","runtimePlatform":".NET 10 for Windows"}]}
   </script>
+  <script src="/theme.js"></script>
   <link rel="stylesheet" href="/styles.css">
+  <script defer src="/copy-code.js"></script>
 </head>
 <body>
   <div class="page-shell">
@@ -29,7 +31,18 @@
         <a href="/transiever/#dotnet">.NET</a>
         <a href="/transiever/sieve-providers/">Providers</a>
       </nav>
-      <a class="quiet-link" href="/">Sebastian Wieland</a>
+      <div class="header-utilities">
+        <a class="quiet-link" href="/">Sebastian Wieland</a>
+        <button class="theme-toggle" type="button" aria-label="Dark mode" aria-pressed="false" hidden>
+          <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+          </svg>
+          <svg class="theme-icon theme-icon-moon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5 8.5 8.5 0 1 0 20.5 14.5Z"></path>
+          </svg>
+        </button>
+      </div>
     </header>
 
     <main>
@@ -52,19 +65,19 @@
       <section class="guide-content" aria-labelledby="start-heading">
         <h2 id="start-heading">Sync through ManageSieve</h2>
         <p>Set the connection values for a provider that offers ManageSieve, then run the Outlook workflow. The command shows the result and asks before changing server rules.</p>
-        <pre><code>TRANSIEVER_SIEVE_HOST=sieve.example.com
-TRANSIEVER_SIEVE_USERNAME=user@example.com
-TRANSIEVER_SIEVE_PASSWORD=secret
+        <pre><code class="language-shell"><span class="syntax-variable">TRANSIEVER_SIEVE_HOST</span>=<span class="syntax-value">sieve.example.com</span>
+<span class="syntax-variable">TRANSIEVER_SIEVE_USERNAME</span>=<span class="syntax-value">user@example.com</span>
+<span class="syntax-variable">TRANSIEVER_SIEVE_PASSWORD</span>=<span class="syntax-value">secret</span>
 
-olrx run</code></pre>
+<span class="syntax-command">olrx</span> run</code></pre>
         <p class="note">ManageSieve is the <a href="https://www.rfc-editor.org/info/rfc5804/">RFC 5804</a> protocol for remotely managing Sieve scripts.</p>
       </section>
 
       <section class="guide-content" aria-labelledby="export-heading">
         <h2 id="export-heading">Export without ManageSieve</h2>
         <p>If your provider accepts a Sieve file but does not expose ManageSieve, export the supported Outlook rules locally and generate the Sieve script with <code>srtx</code>.</p>
-        <pre><code>olrx export --rules outlook-rules.json
-srtx generate --rules outlook-rules.json --sieve outlook.sieve</code></pre>
+        <pre><code class="language-shell"><span class="syntax-command">olrx</span> export <span class="syntax-flag">--rules</span> <span class="syntax-value">outlook-rules.json</span>
+<span class="syntax-command">srtx</span> generate <span class="syntax-flag">--rules</span> <span class="syntax-value">outlook-rules.json</span> <span class="syntax-flag">--sieve</span> <span class="syntax-value">outlook.sieve</span></code></pre>
         <p>See the <a href="https://github.com/SeWieland/Transiever.OutlookResiever">olrx repository</a> for supported rule mapping and the <a href="/transiever/sieve-providers/">provider guide</a> before deployment.</p>
       </section>
     </main>

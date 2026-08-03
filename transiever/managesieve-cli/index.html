@@ -18,7 +18,9 @@
   <script type="application/ld+json">
     {"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://sewieland.github.io/transiever/managesieve-cli/#webpage","url":"https://sewieland.github.io/transiever/managesieve-cli/","name":"ManageSieve command-line client for Sieve scripts","description":"Use msieve to list, download, validate, upload, activate, deactivate, and delete server-side Sieve scripts through ManageSieve."},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Transiever","item":"https://sewieland.github.io/transiever/"},{"@type":"ListItem","position":2,"name":"ManageSieve CLI","item":"https://sewieland.github.io/transiever/managesieve-cli/"}]},{"@type":"SoftwareSourceCode","name":"Transiever.ManageSieve.Cli","codeRepository":"https://github.com/SeWieland/Transiever.ManageSieve","programmingLanguage":"C#","runtimePlatform":".NET 10"}]}
   </script>
+  <script src="/theme.js"></script>
   <link rel="stylesheet" href="/styles.css">
+  <script defer src="/copy-code.js"></script>
 </head>
 <body>
   <div class="page-shell">
@@ -29,7 +31,18 @@
         <a href="/transiever/#dotnet">.NET</a>
         <a href="/transiever/sieve-providers/">Providers</a>
       </nav>
-      <a class="quiet-link" href="/">Sebastian Wieland</a>
+      <div class="header-utilities">
+        <a class="quiet-link" href="/">Sebastian Wieland</a>
+        <button class="theme-toggle" type="button" aria-label="Dark mode" aria-pressed="false" hidden>
+          <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+          </svg>
+          <svg class="theme-icon theme-icon-moon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5 8.5 8.5 0 1 0 20.5 14.5Z"></path>
+          </svg>
+        </button>
+      </div>
     </header>
 
     <main>
@@ -41,22 +54,22 @@
 
       <section class="guide-content" aria-labelledby="install-heading">
         <h2 id="install-heading">Install msieve</h2>
-        <pre><code>dotnet tool install --global Transiever.ManageSieve.Cli
+        <pre><code class="language-shell"><span class="syntax-command">dotnet</span> tool install <span class="syntax-flag">--global</span> <span class="syntax-value">Transiever.ManageSieve.Cli</span>
 
-# Or install a self-contained build
-scoop install transiever/msieve
-brew install SeWieland/transiever/msieve</code></pre>
+<span class="syntax-comment"># Or install a self-contained build</span>
+<span class="syntax-command">scoop</span> install <span class="syntax-value">transiever/msieve</span>
+<span class="syntax-command">brew</span> install <span class="syntax-value">SeWieland/transiever/msieve</span></code></pre>
         <p><a href="https://www.nuget.org/packages/Transiever.ManageSieve.Cli">Transiever.ManageSieve.Cli</a> installs as a global .NET tool. Scoop offers Windows builds; Homebrew offers Linux x64 builds.</p>
       </section>
 
       <section class="guide-content" aria-labelledby="commands-heading">
         <h2 id="commands-heading">Inspect and manage scripts directly</h2>
-        <pre><code>msieve capabilities
-msieve list
-msieve get active --output active.sieve
-msieve check --file candidate.sieve
-msieve put candidate --file candidate.sieve --activate
-msieve deactivate</code></pre>
+        <pre><code class="language-shell"><span class="syntax-command">msieve</span> capabilities
+<span class="syntax-command">msieve</span> list
+<span class="syntax-command">msieve</span> get active <span class="syntax-flag">--output</span> <span class="syntax-value">active.sieve</span>
+<span class="syntax-command">msieve</span> check <span class="syntax-flag">--file</span> <span class="syntax-value">candidate.sieve</span>
+<span class="syntax-command">msieve</span> put candidate <span class="syntax-flag">--file</span> <span class="syntax-value">candidate.sieve</span> <span class="syntax-flag">--activate</span>
+<span class="syntax-command">msieve</span> deactivate</code></pre>
         <p>The CLI uses port <code>4190</code> with required STARTTLS by default and refuses plaintext authentication. It does not generate Sieve, reconcile scripts, create backups, or apply provider-specific policy.</p>
       </section>
 
