@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f6f7f4"/>
+  <rect x="76" y="76" width="1048" height="478" rx="36" fill="#fff" stroke="#d4dcda" stroke-width="4"/>
+  <rect x="132" y="132" width="92" height="92" rx="20" fill="#126a73"/>
+  <path fill="#fff" d="M153 153h50v13h-18v37h-14v-37h-18z"/>
+  <text x="252" y="189" fill="#1d292d" font-family="Segoe UI, Arial, sans-serif" font-size="52" font-weight="700">Transiever</text>
+  <text x="132" y="320" fill="#1d292d" font-family="Segoe UI, Arial, sans-serif" font-size="64" font-weight="700">Sieve &amp; ManageSieve</text>
+  <text x="132" y="400" fill="#59676c" font-family="Segoe UI, Arial, sans-serif" font-size="40">Tools for Outlook · Thunderbird · .NET</text>
+  <text x="132" y="490" fill="#126a73" font-family="Segoe UI, Arial, sans-serif" font-size="32">Server-side mail rules that work beyond one desktop client.</text>
+</svg>

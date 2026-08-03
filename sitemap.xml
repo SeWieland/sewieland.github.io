@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://sewieland.github.io/</loc>
+  </url>
+  <url>
+    <loc>https://sewieland.github.io/transiever/</loc>
+  </url>
+  <url>
+    <loc>https://sewieland.github.io/transiever/outlook-rules-to-sieve/</loc>
+  </url>
+  <url>
+    <loc>https://sewieland.github.io/transiever/thunderbird-filters-to-sieve/</loc>
+  </url>
+  <url>
+    <loc>https://sewieland.github.io/transiever/dotnet-managesieve-client/</loc>
+  </url>
+  <url>
+    <loc>https://sewieland.github.io/transiever/dotnet-sieve-rules/</loc>
+  </url>
+  <url>
+    <loc>https://sewieland.github.io/transiever/managesieve-cli/</loc>
+  </url>
+  <url>
+    <loc>https://sewieland.github.io/transiever/sieve-providers/</loc>
+  </url>
+</urlset>

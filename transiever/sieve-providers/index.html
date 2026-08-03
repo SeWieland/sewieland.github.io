@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sieve and ManageSieve Provider Requirements | Transiever</title>
+  <meta name="description" content="Understand the difference between Sieve and RFC 5804 ManageSieve, verify your mail provider, and choose local export or server synchronization.">
+  <link rel="canonical" href="https://sewieland.github.io/transiever/sieve-providers/">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Transiever">
+  <meta property="og:title" content="Sieve and ManageSieve Provider Requirements">
+  <meta property="og:description" content="Choose local Sieve export or ManageSieve synchronization based on your provider's capabilities.">
+  <meta property="og:url" content="https://sewieland.github.io/transiever/sieve-providers/">
+  <meta property="og:image" content="https://sewieland.github.io/assets/transiever-social.png">
+  <meta property="og:image:alt" content="Transiever: Sieve and ManageSieve tools">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">
+    {"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://sewieland.github.io/transiever/sieve-providers/#webpage","url":"https://sewieland.github.io/transiever/sieve-providers/","name":"Sieve and ManageSieve provider requirements","description":"Understand Sieve support, RFC 5804 ManageSieve, and the Transiever export and synchronization workflows."},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Transiever","item":"https://sewieland.github.io/transiever/"},{"@type":"ListItem","position":2,"name":"Sieve and ManageSieve providers","item":"https://sewieland.github.io/transiever/sieve-providers/"}]}]}
+  </script>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="wordmark" href="/transiever/">Transiever</a>
+      <nav class="site-nav" aria-label="Transiever guides">
+        <a href="/transiever/#workflows">Workflows</a>
+        <a href="/transiever/#dotnet">.NET</a>
+        <a href="/transiever/sieve-providers/">Providers</a>
+      </nav>
+      <a class="quiet-link" href="/">Sebastian Wieland</a>
+    </header>
+
+    <main>
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/transiever/">Transiever</a> / Sieve and ManageSieve providers</nav>
+      <section class="guide-hero" aria-labelledby="hero-heading">
+        <h1 id="hero-heading">Check Sieve and ManageSieve support before you sync.</h1>
+        <p>Sieve is the server-side mail-filter language. ManageSieve is the <a href="https://www.rfc-editor.org/info/rfc5804/">RFC 5804</a> protocol used to remotely inspect, validate, upload, and activate Sieve scripts.</p>
+      </section>
+
+      <section class="guide-content" aria-labelledby="choose-heading">
+        <h2 id="choose-heading">Choose the supported workflow</h2>
+        <div class="guide-grid">
+          <article class="guide-card"><h3>Provider accepts Sieve files</h3><p>Use <code>olrx export</code> or <code>tbrx export</code>, then <code>srtx generate</code>. You do not need ManageSieve credentials.</p></article>
+          <article class="guide-card"><h3>Provider exposes ManageSieve</h3><p>Use <code>olrx run</code>, <code>tbrx run</code>, <code>srtx</code>, or <code>msieve</code> to preview and manage scripts remotely.</p></article>
+        </div>
+        <div class="callout"><p><strong>Not a fit:</strong> a provider without Sieve support cannot run Transiever-generated mail rules. Sieve support alone also does not prove that ManageSieve is available.</p></div>
+      </section>
+
+      <section class="guide-content" aria-labelledby="providers-heading">
+        <h2 id="providers-heading">Known provider context</h2>
+        <ul>
+          <li><a href="https://kb.mailbox.org/en/private/e-mail/can-i-use-sieve-mail-filtering/">mailbox.org</a> and its Open-Xchange rule editor are validated.</li>
+          <li><a href="https://migadu.com/">Migadu</a>, <a href="https://purelymail.com/docs/setup/technical">Purelymail</a>, and self-hosted <a href="https://doc.dovecot.org/2.4.0/core/config/sieve/managesieve.html">Dovecot/Pigeonhole</a> are documented candidates to verify with your account.</li>
+        </ul>
+        <p>Capabilities, TLS requirements, enabled Sieve extensions, quotas, and webmail editor behavior differ by provider. Preview the exact candidate before deployment.</p>
+      </section>
+
+      <section class="guide-content" aria-labelledby="next-heading">
+        <h2 id="next-heading">Next step</h2>
+        <p>For mail-client migration, choose <a href="/transiever/outlook-rules-to-sieve/">classic Outlook rules to Sieve</a> or <a href="/transiever/thunderbird-filters-to-sieve/">Thunderbird filters to Sieve</a>. For direct server operations, start with the <a href="/transiever/managesieve-cli/">ManageSieve CLI</a>.</p>
+      </section>
+    </main>
+
+    <footer>A personal open-source project by <a href="https://github.com/SeWieland">Sebastian Wieland</a>. <a href="https://github.com/SeWieland/Transiever.SieveRuler/blob/main/LICENSE">MIT licensed</a>.</footer>
+  </div>
+</body>
+</html>

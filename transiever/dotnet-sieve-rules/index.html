@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Generate and Deploy Sieve Rules from JSON in .NET | Transiever</title>
+  <meta name="description" content="Use Transiever.SieveRuler and srtx to model JSON mail rules, generate Sieve, reconcile scripts, preview changes, and deploy through ManageSieve.">
+  <link rel="canonical" href="https://sewieland.github.io/transiever/dotnet-sieve-rules/">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Transiever">
+  <meta property="og:title" content="Generate and Deploy Sieve Rules from JSON in .NET">
+  <meta property="og:description" content="Model JSON mail rules, generate Sieve, reconcile scripts, preview changes, and deploy through ManageSieve.">
+  <meta property="og:url" content="https://sewieland.github.io/transiever/dotnet-sieve-rules/">
+  <meta property="og:image" content="https://sewieland.github.io/assets/transiever-social.png">
+  <meta property="og:image:alt" content="Transiever: Sieve and ManageSieve tools">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">
+    {"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://sewieland.github.io/transiever/dotnet-sieve-rules/#webpage","url":"https://sewieland.github.io/transiever/dotnet-sieve-rules/","name":"Generate and deploy Sieve rules from JSON in .NET","description":"Transiever.SieveRuler provides provider-neutral JSON rule models, Sieve generation, reconciliation, preview, and ManageSieve deployment."},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Transiever","item":"https://sewieland.github.io/transiever/"},{"@type":"ListItem","position":2,"name":"Sieve rules from JSON in .NET","item":"https://sewieland.github.io/transiever/dotnet-sieve-rules/"}]},{"@type":"SoftwareSourceCode","name":"Transiever.SieveRuler","codeRepository":"https://github.com/SeWieland/Transiever.SieveRuler","programmingLanguage":"C#","runtimePlatform":".NET 10"}]}
+  </script>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="wordmark" href="/transiever/">Transiever</a>
+      <nav class="site-nav" aria-label="Transiever guides">
+        <a href="/transiever/#workflows">Workflows</a>
+        <a href="/transiever/#dotnet">.NET</a>
+        <a href="/transiever/sieve-providers/">Providers</a>
+      </nav>
+      <a class="quiet-link" href="/">Sebastian Wieland</a>
+    </header>
+
+    <main>
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/transiever/">Transiever</a> / Sieve rules from JSON in .NET</nav>
+      <section class="guide-hero" aria-labelledby="hero-heading">
+        <h1 id="hero-heading">Generate and deploy Sieve rules from JSON in .NET.</h1>
+        <p><code>Transiever.SieveRuler</code> is the provider-neutral rule engine behind Transiever: it models mail rules as JSON, renders Sieve, reconciles existing scripts, and manages safe deployment workflows.</p>
+      </section>
+
+      <section class="guide-content" aria-labelledby="install-heading">
+        <h2 id="install-heading">Install the library or srtx tool</h2>
+        <pre><code>dotnet add package Transiever.SieveRuler
+dotnet tool install --global Transiever.SieveRuler.Cli</code></pre>
+        <p>Use the <a href="https://www.nuget.org/packages/Transiever.SieveRuler">SieveRuler library package</a> in an application, or install the <a href="https://www.nuget.org/packages/Transiever.SieveRuler.Cli">SieveRuler CLI package</a> for the <code>srtx</code> command.</p>
+      </section>
+
+      <section class="guide-content" aria-labelledby="workflow-heading">
+        <h2 id="workflow-heading">Generate, preview, and deploy</h2>
+        <pre><code>srtx inspect --rules rules.json
+srtx generate --rules rules.json --sieve rules.sieve
+srtx preview --rules rules.json --preserve-compatible
+srtx deploy --plan deployment-plan.json</code></pre>
+        <p>Preview writes review artifacts without mutating the server. Deployment validates the candidate, preserves the current active script by default, and can create a server-side backup for rollback.</p>
+      </section>
+
+      <section class="guide-content" aria-labelledby="fit-heading">
+        <h2 id="fit-heading">When SieveRuler is the right tool</h2>
+        <div class="callout"><p><strong>Use SieveRuler</strong> when you need rule models, generated Sieve, reconciliation, and deployment policy. Use <a href="/transiever/dotnet-managesieve-client/">Transiever.ManageSieve</a> when you only need direct RFC 5804 protocol operations.</p></div>
+        <p>Read the <a href="https://github.com/SeWieland/Transiever.SieveRuler">SieveRuler documentation</a> for the JSON schema, compatibility metadata, and synchronization policy.</p>
+      </section>
+    </main>
+
+    <footer>A personal open-source project by <a href="https://github.com/SeWieland">Sebastian Wieland</a>. <a href="https://github.com/SeWieland/Transiever.SieveRuler/blob/main/LICENSE">MIT licensed</a>.</footer>
+  </div>
+</body>
+</html>

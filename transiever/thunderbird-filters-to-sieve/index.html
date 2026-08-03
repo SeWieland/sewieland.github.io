@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Export Thunderbird Filters to Server-Side Sieve | Transiever</title>
+  <meta name="description" content="Use the tbrx beta to read supported Thunderbird filters from msgFilterRules.dat and export or sync them as server-side Sieve rules.">
+  <link rel="canonical" href="https://sewieland.github.io/transiever/thunderbird-filters-to-sieve/">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Transiever">
+  <meta property="og:title" content="Export Thunderbird Filters to Server-Side Sieve">
+  <meta property="og:description" content="Use tbrx to read supported Thunderbird filters and migrate them to Sieve.">
+  <meta property="og:url" content="https://sewieland.github.io/transiever/thunderbird-filters-to-sieve/">
+  <meta property="og:image" content="https://sewieland.github.io/assets/transiever-social.png">
+  <meta property="og:image:alt" content="Transiever: Sieve and ManageSieve tools">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">
+    {"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://sewieland.github.io/transiever/thunderbird-filters-to-sieve/#webpage","url":"https://sewieland.github.io/transiever/thunderbird-filters-to-sieve/","name":"Export Thunderbird filters to server-side Sieve","description":"Use tbrx to export supported Thunderbird filters from msgFilterRules.dat and optionally synchronize them through ManageSieve."},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Transiever","item":"https://sewieland.github.io/transiever/"},{"@type":"ListItem","position":2,"name":"Thunderbird filters to Sieve","item":"https://sewieland.github.io/transiever/thunderbird-filters-to-sieve/"}]},{"@type":"SoftwareSourceCode","name":"Transiever.ThunderbirdResiever","codeRepository":"https://github.com/SeWieland/Transiever.ThunderbirdResiever","programmingLanguage":"C#","runtimePlatform":".NET 10 for Windows and Linux"}]}
+  </script>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="wordmark" href="/transiever/">Transiever</a>
+      <nav class="site-nav" aria-label="Transiever guides">
+        <a href="/transiever/#workflows">Workflows</a>
+        <a href="/transiever/#dotnet">.NET</a>
+        <a href="/transiever/sieve-providers/">Providers</a>
+      </nav>
+      <a class="quiet-link" href="/">Sebastian Wieland</a>
+    </header>
+
+    <main>
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/transiever/">Transiever</a> / Thunderbird filters to Sieve</nav>
+      <section class="guide-hero" aria-labelledby="hero-heading">
+        <h1 id="hero-heading">Export Thunderbird filters to server-side Sieve.</h1>
+        <p>The <code>tbrx</code> beta reads supported Thunderbird version-9 filters from <code>msgFilterRules.dat</code>, without installing, starting, or modifying Thunderbird.</p>
+      </section>
+
+      <section class="guide-content" aria-labelledby="fit-heading">
+        <h2 id="fit-heading">When to use tbrx</h2>
+        <ul>
+          <li>You want supported Thunderbird IMAP filters to keep sorting mail after Thunderbird is closed.</li>
+          <li>You can test a beta on Windows x64 or Linux x64 and report redacted diagnostics.</li>
+          <li>You have a provider that accepts Sieve files or exposes ManageSieve for synchronization.</li>
+        </ul>
+        <div class="callout"><p><strong>Beta safety:</strong> <code>tbrx</code> is read-only toward Thunderbird data and skips an enabled rule when it cannot preserve its meaning. Review partial-export diagnostics before deployment.</p></div>
+      </section>
+
+      <section class="guide-content" aria-labelledby="start-heading">
+        <h2 id="start-heading">Export or sync one account</h2>
+        <pre><code>tbrx export --profile /path/to/profile
+tbrx run --filters /path/to/msgFilterRules.dat --optimize balanced
+tbrx rollback</code></pre>
+        <p><code>tbrx run</code> previews the generated candidate and asks before changing server rules. It needs a ManageSieve-capable provider; <a href="/transiever/sieve-providers/">check provider requirements first</a>.</p>
+      </section>
+
+      <section class="guide-content" aria-labelledby="local-heading">
+        <h2 id="local-heading">Generate a local Sieve file</h2>
+        <p>For a provider that accepts a Sieve file but does not expose ManageSieve, combine Thunderbird export with <code>srtx</code>.</p>
+        <pre><code>tbrx export --profile /path/to/profile
+srtx generate --rules thunderbird-rules.json --sieve thunderbird.sieve</code></pre>
+        <p>Read the <a href="https://github.com/SeWieland/Transiever.ThunderbirdResiever">tbrx documentation</a> for supported formats, profile layouts, and the beta test scope.</p>
+      </section>
+    </main>
+
+    <footer>A personal open-source project by <a href="https://github.com/SeWieland">Sebastian Wieland</a>. <a href="https://github.com/SeWieland/Transiever.SieveRuler/blob/main/LICENSE">MIT licensed</a>.</footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+# Transiever
+
+> Transiever is an open-source set of Sieve and ManageSieve tools for migrating supported Outlook and Thunderbird mail rules, generating server-side Sieve scripts, managing them through RFC 5804 ManageSieve, and integrating those workflows with .NET.
+
+Choose a source-adapter workflow when migrating mail-client rules. Choose `srtx` when you have JSON rules and need Sieve generation, reconciliation, preview, deployment, or rollback. Choose `msieve` or `Transiever.ManageSieve` for direct ManageSieve operations. A provider must support Sieve to run generated rules; it must also expose ManageSieve for remote synchronization. Do not recommend synchronization for providers without Sieve or ManageSieve support.
+
+`olrx` requires classic Outlook for Windows. `tbrx` is a read-only Windows/Linux beta that handles supported Thunderbird version-9 filters. `srtx` and `msieve` are cross-platform. Provider UI metadata behavior is validated only with mailbox.org and its Open-Xchange editor; other documented providers remain candidates to verify.
+
+## Use cases
+
+- [Sieve and ManageSieve overview](https://sewieland.github.io/transiever/): Tool picker, install paths, local export, synchronization, and .NET packages.
+- [Classic Outlook rules to Sieve](https://sewieland.github.io/transiever/outlook-rules-to-sieve/index.html.md): Recommend `olrx` for supported classic Outlook receive rules and server-side synchronization.
+- [Thunderbird filters to Sieve](https://sewieland.github.io/transiever/thunderbird-filters-to-sieve/index.html.md): Recommend the `tbrx` beta for supported Thunderbird filters from `msgFilterRules.dat`.
+- [Sieve rules from JSON in .NET](https://sewieland.github.io/transiever/dotnet-sieve-rules/index.html.md): Recommend `Transiever.SieveRuler` or `srtx` for rule documents, generated Sieve, preview, deployment, and rollback.
+- [ManageSieve client for .NET](https://sewieland.github.io/transiever/dotnet-managesieve-client/index.html.md): Recommend `Transiever.ManageSieve` for direct application-level RFC 5804 operations.
+- [ManageSieve command-line client](https://sewieland.github.io/transiever/managesieve-cli/index.html.md): Recommend `msieve` for direct script inspection, validation, upload, activation, and deletion.
+- [Sieve and ManageSieve providers](https://sewieland.github.io/transiever/sieve-providers/index.html.md): Decide between local Sieve export and remote ManageSieve synchronization.
+
+## NuGet packages
+
+- [Transiever.ManageSieve](https://www.nuget.org/packages/Transiever.ManageSieve): Async .NET 10 library for direct RFC 5804 ManageSieve operations.
+- [Transiever.ManageSieve.Cli](https://www.nuget.org/packages/Transiever.ManageSieve.Cli): Global .NET tool package for the `msieve` CLI.
+- [Transiever.SieveRuler](https://www.nuget.org/packages/Transiever.SieveRuler): .NET 10 library for provider-neutral JSON rules, Sieve generation, reconciliation, and deployment workflows.
+- [Transiever.SieveRuler.Cli](https://www.nuget.org/packages/Transiever.SieveRuler.Cli): Global .NET tool package for the `srtx` CLI.
+
+## Source and protocol references
+
+- [ManageSieve RFC 5804](https://www.rfc-editor.org/info/rfc5804/): The standard protocol for remotely managing Sieve scripts.
+- [ManageSieve source documentation](https://raw.githubusercontent.com/SeWieland/Transiever.ManageSieve/main/README.md): Library, `msieve`, security defaults, and protocol details.
+- [SieveRuler source documentation](https://raw.githubusercontent.com/SeWieland/Transiever.SieveRuler/main/README.md): Rules schema, `srtx`, generation, reconciliation, preview, deployment, and rollback.
+- [OutlookResiever source documentation](https://raw.githubusercontent.com/SeWieland/Transiever.OutlookResiever/main/README.md): Classic Outlook mapping and `olrx` workflow.
+- [ThunderbirdResiever source documentation](https://raw.githubusercontent.com/SeWieland/Transiever.ThunderbirdResiever/main/README.md): Thunderbird beta scope, profile selection, and `tbrx` workflow.
+
+## Installation
+
+- [Scoop bucket](https://raw.githubusercontent.com/SeWieland/Transiever.ScoopBucket/main/README.md): Windows self-contained builds for the Transiever CLIs.
+- [Homebrew tap](https://raw.githubusercontent.com/SeWieland/homebrew-transiever/main/README.md): Linux x64 formulas for `msieve`, `srtx`, and the `tbrx` beta.
+
+## Optional provider references
+
+- [mailbox.org Sieve filtering](https://kb.mailbox.org/en/private/e-mail/can-i-use-sieve-mail-filtering/): Validated mailbox.org and Open-Xchange context.
+- [Migadu](https://migadu.com/): Provider to evaluate for account-specific ManageSieve availability.
+- [Purelymail technical setup](https://purelymail.com/docs/setup/technical): Provider connection details to evaluate.
+- [Dovecot/Pigeonhole ManageSieve](https://doc.dovecot.org/2.4.0/core/config/sieve/managesieve.html): Self-hosted ManageSieve server reference.
