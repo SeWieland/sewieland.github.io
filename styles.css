@@ -243,12 +243,6 @@ main > section:not(.hero):not(.guide-hero) {
   text-transform: uppercase;
 }
 
-.tool .tester-link {
-  margin-top: 1rem;
-  color: var(--text);
-  font-size: 0.92rem;
-}
-
 .install-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -278,11 +272,6 @@ pre {
   margin-top: 0.75rem;
   color: var(--muted);
   font-size: 0.92rem;
-}
-
-.section-intro {
-  max-width: 42rem;
-  color: var(--muted);
 }
 
 .pipeline {

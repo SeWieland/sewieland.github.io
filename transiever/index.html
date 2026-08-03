@@ -65,7 +65,7 @@
       </section>
 
       <section aria-labelledby="provider-heading">
-        <h2 id="provider-heading">Works with your mail provider</h2>
+        <h2 id="provider-heading">Check provider compatibility</h2>
         <div class="tool-grid">
           <article class="tool">
             <p class="tool-meta">Validated</p>
@@ -83,40 +83,7 @@
             </p>
           </article>
         </div>
-        <p class="note">ManageSieve is the <a href="https://www.rfc-editor.org/info/rfc5804/">RFC 5804</a> protocol for remotely managing Sieve scripts. Sieve support alone does not guarantee ManageSieve; preview before deploying.</p>
-      </section>
-
-      <section aria-labelledby="tools-heading">
-        <h2 id="tools-heading">Start where you are</h2>
-        <p class="section-intro">Bring rules from your mail client, generate a Sieve script, or work directly with the server.</p>
-        <div class="tool-grid">
-          <article class="tool">
-            <p class="tool-meta">Windows x64</p>
-            <h3><a href="/transiever/outlook-rules-to-sieve/">olrx</a></h3>
-            <p>Bring supported classic Outlook receive rules to your mail server.</p>
-          </article>
-
-          <article class="tool">
-            <p class="tool-meta">Windows and Linux · Beta</p>
-            <h3><a href="/transiever/thunderbird-filters-to-sieve/">tbrx</a></h3>
-            <p>Bring supported Thunderbird filters to your mail server.</p>
-            <p class="tester-link">
-              <a href="https://github.com/SeWieland/Transiever.ThunderbirdResiever/issues">Unstable beta — testers wanted</a>
-            </p>
-          </article>
-
-          <article class="tool">
-            <p class="tool-meta">Windows and Linux</p>
-            <h3><a href="/transiever/dotnet-sieve-rules/">srtx</a></h3>
-            <p>Generate a Sieve script from a rule file, or preview and safely deploy it through ManageSieve.</p>
-          </article>
-
-          <article class="tool">
-            <p class="tool-meta">Windows and Linux</p>
-            <h3><a href="/transiever/managesieve-cli/">msieve</a></h3>
-            <p>ManageSieve client for listing, downloading, checking, uploading, and activating Sieve scripts.</p>
-          </article>
-        </div>
+        <p class="note">ManageSieve is the <a href="https://www.rfc-editor.org/info/rfc5804/">RFC 5804</a> protocol for remotely managing Sieve scripts. Sieve support alone does not guarantee ManageSieve; <a href="/transiever/sieve-providers/">check support before you sync</a>.</p>
       </section>
 
       <section class="install-section" aria-labelledby="install-heading">
@@ -156,28 +123,8 @@ brew install SeWieland/transiever/msieve</code></pre>
         </div>
       </section>
 
-      <section aria-labelledby="export-heading">
-        <h2 id="export-heading">Export a Sieve script</h2>
-        <p class="section-intro">No ManageSieve? Export supported rules to a local Sieve script for a provider that accepts one.</p>
-        <pre><code>olrx export --rules outlook-rules.json
-srtx generate --rules outlook-rules.json --sieve outlook.sieve</code></pre>
-        <p class="note">For Thunderbird, use <code>tbrx export</code> to create the rules file, then run the same <code>srtx generate</code> step. This workflow reads local client rules and writes local files; it needs no server credentials or ManageSieve connection.</p>
-      </section>
-
-      <section class="sync-section" aria-labelledby="sync-heading">
-        <h2 id="sync-heading">Sync with confidence</h2>
-        <p class="section-intro">Set your ManageSieve connection once, then run the adapter for your mail client.</p>
-        <pre><code>TRANSIEVER_SIEVE_HOST=sieve.example.com
-TRANSIEVER_SIEVE_USERNAME=user@example.com
-TRANSIEVER_SIEVE_PASSWORD=secret
-
-olrx run  # Outlook
-tbrx run  # Thunderbird</code></pre>
-        <p class="note">Both commands show the result and ask before changing your server rules.</p>
-      </section>
-
       <section class="relationship" aria-labelledby="relationship-heading">
-        <h2 id="relationship-heading">Sync through ManageSieve</h2>
+        <h2 id="relationship-heading">How server sync works</h2>
         <div class="pipeline">
           <div class="pipeline-stage">
             <p class="pipeline-label">Rule sources</p>
