@@ -16,7 +16,7 @@
   <meta property="og:image:alt" content="Transiever: Sieve and ManageSieve tools">
   <meta name="twitter:card" content="summary_large_image">
   <script type="application/ld+json">
-    {"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://sewieland.github.io/transiever/dotnet-managesieve-client/#webpage","url":"https://sewieland.github.io/transiever/dotnet-managesieve-client/","name":"ManageSieve client for .NET and C#","description":"Transiever.ManageSieve is an async .NET client library for RFC 5804 ManageSieve and secure server-side Sieve operations."},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Transiever","item":"https://sewieland.github.io/transiever/"},{"@type":"ListItem","position":2,"name":"ManageSieve client for .NET","item":"https://sewieland.github.io/transiever/dotnet-managesieve-client/"}]},{"@type":"SoftwareSourceCode","name":"Transiever.ManageSieve","codeRepository":"https://github.com/SeWieland/Transiever.ManageSieve","programmingLanguage":"C#","runtimePlatform":".NET 10"}]}
+    {"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://sewieland.github.io/transiever/dotnet-managesieve-client/#webpage","url":"https://sewieland.github.io/transiever/dotnet-managesieve-client/","name":"ManageSieve client for .NET and C#","description":"Transiever.ManageSieve is an async .NET client library for RFC 5804 ManageSieve and secure server-side Sieve operations.","dateModified":"2026-08-05"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Transiever","item":"https://sewieland.github.io/transiever/"},{"@type":"ListItem","position":2,"name":"ManageSieve client for .NET","item":"https://sewieland.github.io/transiever/dotnet-managesieve-client/"}]},{"@type":"SoftwareSourceCode","name":"Transiever.ManageSieve","codeRepository":"https://github.com/SeWieland/Transiever.ManageSieve","programmingLanguage":"C#","runtimePlatform":".NET 10"}]}
   </script>
   <script src="/theme.js"></script>
   <link rel="stylesheet" href="/styles.css">
@@ -62,6 +62,7 @@
       <section class="guide-content" aria-labelledby="use-heading">
         <h2 id="use-heading">Use it for direct script operations</h2>
         <p>The client provides TCP, STARTTLS, and implicit TLS transport; capability-driven SASL authentication; streaming response parsing; and the RFC 5804 command surface for listing, downloading, checking, uploading, activating, and deleting scripts.</p>
+        <p>Automated integration tests exercise the supported command set against a pinned Dovecot/Pigeonhole server image, while deterministic unit tests cover fragmented input and protocol edge cases.</p>
         <pre><code class="language-csharp"><span class="syntax-type">IReadOnlyList&lt;ManageSieveScriptInfo&gt;</span> scripts =
     <span class="syntax-keyword">await</span> client.<span class="syntax-method">ListScriptsAsync</span>(cancellationToken);
 

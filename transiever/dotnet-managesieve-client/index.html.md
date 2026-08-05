@@ -9,6 +9,7 @@ dotnet tool install --global Transiever.ManageSieve.Cli
 
 The companion CLI package installs `msieve`.
 The client supports TCP, STARTTLS, implicit TLS, capability-driven SASL authentication, and streaming protocol parsing.
+Automated integration tests exercise supported commands against a pinned Dovecot/Pigeonhole server image.
 
 Use this library when the application owns its Sieve policy.
 Use SieveRuler when you also need rule models, generation, reconciliation, and deployment workflows.
