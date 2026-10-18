@@ -23,16 +23,16 @@
   <script defer src="/copy-code.js"></script>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
   <div class="page-shell">
     <header class="site-header">
       <a class="wordmark" href="/transiever/">Transiever</a>
       <nav class="site-nav" aria-label="Transiever guides">
-        <a href="/transiever/#workflows">Workflows</a>
+        <a href="/transiever/#workflows">Mail rules</a>
         <a href="/transiever/#dotnet">.NET</a>
         <a href="/transiever/sieve-providers/">Providers</a>
       </nav>
       <div class="header-utilities">
-        <a class="quiet-link" href="/">Sebastian Wieland</a>
         <button class="theme-toggle" type="button" aria-label="Dark mode" aria-pressed="false" hidden>
           <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
             <circle cx="12" cy="12" r="4"></circle>
@@ -45,44 +45,50 @@
       </div>
     </header>
 
-    <main>
+    <main id="main-content" tabindex="-1">
       <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/transiever/">Transiever</a> / Classic Outlook rules to Sieve</nav>
       <section class="guide-hero" aria-labelledby="hero-heading">
         <h1 id="hero-heading">Convert classic Outlook rules to server-side Sieve.</h1>
         <p><code>olrx</code> exports supported classic Outlook receive rules so that a Sieve-capable mail server can apply them before mail reaches your phone, webmail, or another desktop client.</p>
       </section>
 
+
       <section class="guide-content" aria-labelledby="fit-heading">
-        <h2 id="fit-heading">When to use olrx</h2>
-        <ul>
-          <li>You use classic Outlook for Windows and want supported receive rules to work server-side.</li>
-          <li>Your provider accepts Sieve scripts, or exposes ManageSieve for preview and deployment.</li>
-          <li>You want a guided preview, server-side backup, and rollback rather than hand-editing scripts.</li>
-        </ul>
-        <div class="callout"><p><strong>Not a fit:</strong> <code>olrx</code> requires configured classic Outlook for Windows. It does not turn unsupported rules or a provider without Sieve support into compatible server-side rules.</p></div>
+        <h2 id="fit-heading">Check the fit</h2>
+        <p>You need Windows x64 and configured classic Outlook. Your provider must accept Sieve files for server-side filtering, or expose ManageSieve for remote synchronization.</p>
+        <div class="callout"><p><strong>Review the export:</strong> only supported receive rules can be converted. Read the diagnostics and inspect the generated script before deployment.</p></div>
       </section>
-
-      <section class="guide-content" aria-labelledby="start-heading">
-        <h2 id="start-heading">Sync through ManageSieve</h2>
-        <p>Set the connection values for a provider that offers ManageSieve, then run the Outlook workflow. The command shows the result and asks before changing server rules.</p>
-        <pre><code class="language-shell"><span class="syntax-variable">TRANSIEVER_SIEVE_HOST</span>=<span class="syntax-value">sieve.example.com</span>
-<span class="syntax-variable">TRANSIEVER_SIEVE_USERNAME</span>=<span class="syntax-value">user@example.com</span>
-<span class="syntax-variable">TRANSIEVER_SIEVE_PASSWORD</span>=<span class="syntax-value">secret</span>
-
-<span class="syntax-command">olrx</span> run</code></pre>
-        <p class="note">ManageSieve is the <a href="https://www.rfc-editor.org/info/rfc5804/">RFC 5804</a> protocol for remotely managing Sieve scripts.</p>
+      <section class="guide-content" aria-labelledby="install-heading">
+        <h2 id="install-heading">Install on Windows</h2>
+        <p>With Scoop already installed, add the <a href="https://github.com/SeWieland/Transiever.ScoopBucket">Transiever bucket</a> once. Install <code>olrx</code> for Outlook export and <code>srtx</code> for local Sieve generation.</p>
+        <h3>PowerShell</h3>
+        <pre tabindex="0"><code class="language-powershell">scoop bucket add transiever https://github.com/SeWieland/Transiever.ScoopBucket
+scoop install transiever/olrx
+scoop install transiever/srtx</code></pre>
       </section>
-
       <section class="guide-content" aria-labelledby="export-heading">
-        <h2 id="export-heading">Export without ManageSieve</h2>
-        <p>If your provider accepts a Sieve file but does not expose ManageSieve, export the supported Outlook rules locally and generate the Sieve script with <code>srtx</code>.</p>
-        <pre><code class="language-shell"><span class="syntax-command">olrx</span> export <span class="syntax-flag">--rules</span> <span class="syntax-value">outlook-rules.json</span>
-<span class="syntax-command">srtx</span> generate <span class="syntax-flag">--rules</span> <span class="syntax-value">outlook-rules.json</span> <span class="syntax-flag">--sieve</span> <span class="syntax-value">outlook.sieve</span></code></pre>
-        <p>See the <a href="https://github.com/SeWieland/Transiever.OutlookResiever">olrx repository</a> for supported rule mapping and the <a href="/transiever/sieve-providers/">provider guide</a> before deployment.</p>
+        <h2 id="export-heading">Export a local Sieve script</h2>
+        <p>Use a new working directory so you do not overwrite earlier exports. These commands read Outlook rules and write local files; they do not change your mail server.</p>
+        <h3>PowerShell</h3>
+        <pre tabindex="0"><code class="language-powershell">olrx export --rules outlook-rules.json
+srtx generate --rules outlook-rules.json --sieve outlook.sieve</code></pre>
+        <p>The result is <code>outlook-rules.json</code> and <code>outlook.sieve</code>. Review export diagnostics and folder names in the generated script before using it with your provider.</p>
       </section>
+      <section class="guide-content" aria-labelledby="start-heading">
+        <h2 id="start-heading">Preview a server sync</h2>
+        <p>For a <a href="/transiever/sieve-providers/">ManageSieve-capable provider</a>, replace the example host and username below. In an interactive terminal, the tool prompts for a missing password without echoing it. The dry run does not write files or change server rules.</p>
+        <h3>PowerShell</h3>
+        <pre tabindex="0"><code class="language-powershell">$env:TRANSIEVER_SIEVE_HOST = "sieve.example.com"
+$env:TRANSIEVER_SIEVE_USERNAME = "user@example.com"
+olrx run --no-optimize --dry-run</code></pre>
+        <p>After reviewing the preview, run the guided workflow separately. It asks before deployment and creates a server-side backup when replacing the active script.</p>
+        <pre tabindex="0"><code class="language-powershell">olrx run --no-optimize</code></pre>
+        <p>See the <a href="https://github.com/SeWieland/Transiever.OutlookResiever/blob/main/src/Transiever.OutlookResiever.Cli/README.md">olrx CLI guide</a> for authentication options, rollback, and workflow details, and the <a href="https://github.com/SeWieland/Transiever.OutlookResiever/blob/main/docs/outlook-export.md">Outlook mapping guide</a> for supported rules.</p>
+      </section>
+
     </main>
 
-    <footer>A personal open-source project by <a href="https://github.com/SeWieland">Sebastian Wieland</a>. <a href="https://github.com/SeWieland/Transiever.SieveRuler/blob/main/LICENSE">MIT licensed</a>.</footer>
+    <footer>A personal open-source project by <a href="/">Sebastian Wieland</a>. <a href="https://github.com/SeWieland/Transiever.SieveRuler/blob/main/LICENSE">MIT licensed</a>.</footer>
   </div>
 </body>
 </html>

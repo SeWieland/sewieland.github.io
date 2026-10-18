@@ -23,16 +23,16 @@
   <script defer src="/copy-code.js"></script>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
   <div class="page-shell">
     <header class="site-header">
       <a class="wordmark" href="/transiever/">Transiever</a>
       <nav class="site-nav" aria-label="Transiever guides">
-        <a href="/transiever/#workflows">Workflows</a>
+        <a href="/transiever/#workflows">Mail rules</a>
         <a href="/transiever/#dotnet">.NET</a>
         <a href="/transiever/sieve-providers/">Providers</a>
       </nav>
       <div class="header-utilities">
-        <a class="quiet-link" href="/">Sebastian Wieland</a>
         <button class="theme-toggle" type="button" aria-label="Dark mode" aria-pressed="false" hidden>
           <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
             <circle cx="12" cy="12" r="4"></circle>
@@ -45,39 +45,54 @@
       </div>
     </header>
 
-    <main>
+    <main id="main-content" tabindex="-1">
       <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/transiever/">Transiever</a> / ManageSieve client for .NET</nav>
       <section class="guide-hero" aria-labelledby="hero-heading">
         <h1 id="hero-heading">A ManageSieve client for .NET and C#.</h1>
         <p><code>Transiever.ManageSieve</code> is an async-first .NET 10 library for directly managing server-side Sieve scripts through the <a href="https://www.rfc-editor.org/info/rfc5804/">RFC 5804</a> ManageSieve protocol.</p>
       </section>
 
+
       <section class="guide-content" aria-labelledby="install-heading">
-        <h2 id="install-heading">Install the library or CLI</h2>
-        <pre><code class="language-shell"><span class="syntax-command">dotnet</span> add package <span class="syntax-value">Transiever.ManageSieve</span>
-<span class="syntax-command">dotnet</span> tool install <span class="syntax-flag">--global</span> <span class="syntax-value">Transiever.ManageSieve.Cli</span></code></pre>
-        <p>The library is available from <a href="https://www.nuget.org/packages/Transiever.ManageSieve">NuGet</a>. The companion <a href="https://www.nuget.org/packages/Transiever.ManageSieve.Cli">CLI package</a> installs the direct-protocol <code>msieve</code> command.</p>
+        <h2 id="install-heading">Create a .NET 10 console application</h2>
+        <p>With the .NET 10 SDK installed, create a new project and add the <a href="https://www.nuget.org/packages/Transiever.ManageSieve">ManageSieve library</a>.</p>
+        <h3>PowerShell or Bash</h3>
+        <pre tabindex="0"><code class="language-shell">dotnet new console --framework net10.0 --name ManageSieveQuickstart
+cd ManageSieveQuickstart
+dotnet add package Transiever.ManageSieve</code></pre>
       </section>
-
       <section class="guide-content" aria-labelledby="use-heading">
-        <h2 id="use-heading">Use it for direct script operations</h2>
-        <p>The client provides TCP, STARTTLS, and implicit TLS transport; capability-driven SASL authentication; streaming response parsing; and the RFC 5804 command surface for listing, downloading, checking, uploading, activating, and deleting scripts.</p>
-        <p>Automated integration tests exercise the supported command set against a pinned Dovecot/Pigeonhole server image, while deterministic unit tests cover fragmented input and protocol edge cases.</p>
-        <pre><code class="language-csharp"><span class="syntax-type">IReadOnlyList&lt;ManageSieveScriptInfo&gt;</span> scripts =
-    <span class="syntax-keyword">await</span> client.<span class="syntax-method">ListScriptsAsync</span>(cancellationToken);
+        <h2 id="use-heading">Read server capabilities over TLS</h2>
+        <p>Replace <code>Program.cs</code> with this example and set the host to your provider's ManageSieve endpoint. It requires STARTTLS on port 4190 by default and uses normal platform certificate validation.</p>
+        <h3>C#</h3>
+        <pre tabindex="0"><code class="language-csharp">using Transiever.ManageSieve;
 
-<span class="syntax-keyword">await</span> client.<span class="syntax-method">PutScriptAsync</span>(<span class="syntax-string">"candidate"</span>, candidateBytes, cancellationToken);
-<span class="syntax-keyword">await</span> client.<span class="syntax-method">SetActiveScriptAsync</span>(<span class="syntax-string">"candidate"</span>, cancellationToken);</code></pre>
+ManageSieveClientOptions options = new()
+{
+    Host = "sieve.example.com"
+};
+
+await using IManageSieveClient client =
+    new ManageSieveClientFactory().CreateClient(options);
+await client.ConnectAsync();
+await client.StartTlsAsync();
+ManageSieveCapabilities capabilities = await client.RefreshCapabilitiesAsync();
+Console.WriteLine(string.Join(", ", capabilities.SieveExtensions));</code></pre>
+        <p>Run the application from its project directory.</p>
+        <pre tabindex="0"><code class="language-shell">dotnet run</code></pre>
+        <p>The result lists the server's advertised Sieve extensions. This example does not authenticate or change scripts. An unavailable endpoint, unsupported STARTTLS, or invalid certificate fails the connection.</p>
       </section>
-
       <section class="guide-content" aria-labelledby="fit-heading">
         <h2 id="fit-heading">Choose the right layer</h2>
-        <div class="callout"><p><strong>Use this package</strong> when your application owns its Sieve policy and needs direct protocol operations. Use <a href="/transiever/dotnet-sieve-rules/">SieveRuler</a> when you also need provider-neutral rule models, Sieve generation, reconciliation, preview, deployment, and rollback.</p></div>
-        <p>See the <a href="https://github.com/SeWieland/Transiever.ManageSieve">ManageSieve repository</a> for its public API, security defaults, and protocol details.</p>
+        <p>Use this library when your application owns Sieve policy and needs direct protocol operations. Authentication is required for script operations; the library supports capability-driven SASL authentication.</p>
+        <p>Use <a href="/transiever/dotnet-sieve-rules/">SieveRuler</a> for rule models, generation, reconciliation, preview, deployment, and rollback. Prefer a command-line tool? Start with <a href="/transiever/managesieve-cli/">msieve</a>.</p>
+        <p>The <a href="https://github.com/SeWieland/Transiever.ManageSieve/blob/main/src/Transiever.ManageSieve/README.md">library reference</a> covers public contracts and script operations; the <a href="https://github.com/SeWieland/Transiever.ManageSieve/blob/main/docs/authentication.md">authentication guide</a> covers mechanism selection and security.</p>
+        <p>Automated integration tests exercise the supported command set against a pinned Dovecot/Pigeonhole image; deterministic unit tests cover fragmented input and protocol edge cases.</p>
       </section>
+
     </main>
 
-    <footer>A personal open-source project by <a href="https://github.com/SeWieland">Sebastian Wieland</a>. <a href="https://github.com/SeWieland/Transiever.SieveRuler/blob/main/LICENSE">MIT licensed</a>.</footer>
+    <footer>A personal open-source project by <a href="/">Sebastian Wieland</a>. <a href="https://github.com/SeWieland/Transiever.SieveRuler/blob/main/LICENSE">MIT licensed</a>.</footer>
   </div>
 </body>
 </html>

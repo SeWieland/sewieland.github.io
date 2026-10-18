@@ -23,16 +23,16 @@
   <script defer src="/copy-code.js"></script>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
   <div class="page-shell">
     <header class="site-header">
       <a class="wordmark" href="/transiever/">Transiever</a>
       <nav class="site-nav" aria-label="Transiever guides">
-        <a href="#workflows">Workflows</a>
+        <a href="#workflows">Mail rules</a>
         <a href="#dotnet">.NET</a>
         <a href="/transiever/sieve-providers/">Providers</a>
       </nav>
       <div class="header-utilities">
-        <a class="quiet-link" href="/">Sebastian Wieland</a>
         <button class="theme-toggle" type="button" aria-label="Dark mode" aria-pressed="false" hidden>
           <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
             <circle cx="12" cy="12" r="4"></circle>
@@ -45,95 +45,52 @@
       </div>
     </header>
 
-    <main>
+    <main id="main-content" tabindex="-1">
+
       <section class="hero" aria-labelledby="hero-heading">
-        <h1 id="hero-heading">Sieve and ManageSieve tools for Outlook, Thunderbird, and .NET.</h1>
-        <p>
-          Keep mail rules close to your mail: turn supported Outlook and Thunderbird filters into server-side Sieve scripts,
-          then manage them through ManageSieve when your provider supports it.
-        </p>
+        <h1 id="hero-heading">Mail rules on your server. Sieve tools in your code.</h1>
+        <p>Move supported Outlook and Thunderbird filters to server-side Sieve, or build Sieve and ManageSieve into your .NET application.</p>
       </section>
 
-      <section id="workflows" aria-labelledby="workflows-heading">
-        <h2 id="workflows-heading">Choose your workflow</h2>
-        <div class="guide-grid">
-          <article class="guide-card">
-            <h3><a href="/transiever/outlook-rules-to-sieve/">Classic Outlook rules to Sieve</a></h3>
-            <p>Use <code>olrx</code> to export supported classic Outlook receive rules and, when available, sync them to a ManageSieve server.</p>
-          </article>
-          <article class="guide-card">
-            <h3><a href="/transiever/thunderbird-filters-to-sieve/">Thunderbird filters to Sieve</a></h3>
-            <p>Use the read-only <code>tbrx</code> beta to migrate supported Thunderbird filters from <code>msgFilterRules.dat</code>.</p>
-          </article>
-          <article class="guide-card">
-            <h3><a href="/transiever/dotnet-sieve-rules/">Generate Sieve from JSON</a></h3>
-            <p>Use <code>srtx</code> or the SieveRuler library to generate, reconcile, preview, and deploy Sieve rules.</p>
-          </article>
-          <article class="guide-card">
-            <h3><a href="/transiever/managesieve-cli/">Manage scripts directly</a></h3>
-            <p>Use <code>msieve</code> or the ManageSieve .NET library for direct server-side script operations.</p>
-          </article>
-        </div>
-        <p class="note">No ManageSieve? Export a local Sieve script for a provider that accepts one. No Sieve support at all? Transiever cannot deploy mail rules to that provider.</p>
-      </section>
+      <div class="audience-grid">
+        <section class="audience-path" id="workflows" aria-labelledby="workflows-heading">
+          <h2 id="workflows-heading">Move your mail rules</h2>
+          <p>Keep supported filters working when your mail client is closed. Start with a local export, then review before you sync.</p>
+          <ul class="path-links">
+            <li><a href="/transiever/outlook-rules-to-sieve/">Start with classic Outlook</a><p><code>olrx</code> requires configured classic Outlook on Windows x64.</p></li>
+            <li><a href="/transiever/thunderbird-filters-to-sieve/">Start with Thunderbird</a><p>The read-only <code>tbrx</code> beta supports Windows x64 and Linux x64.</p></li>
+          </ul>
+        </section>
+        <section class="audience-path" id="dotnet" aria-labelledby="dotnet-heading">
+          <h2 id="dotnet-heading">Build with .NET</h2>
+          <p>Choose the layer your application needs. Both libraries target .NET 10 and have a short C# quickstart.</p>
+          <ul class="path-links">
+            <li><a href="/transiever/dotnet-sieve-rules/">Generate Sieve with SieveRuler</a><p>Model rules, render scripts, and add reconciliation and deployment workflows.</p></li>
+            <li><a href="/transiever/dotnet-managesieve-client/">Connect with ManageSieve</a><p>Use direct RFC 5804 protocol operations when your application owns the policy.</p></li>
+          </ul>
+        </section>
+      </div>
 
       <section aria-labelledby="provider-heading">
-        <h2 id="provider-heading">Check provider compatibility</h2>
+        <h2 id="provider-heading">Check your provider before you sync</h2>
+        <p>Sieve runs mail filters on the server. ManageSieve is the separate protocol for managing those scripts remotely.</p>
+        <p>No ManageSieve? Export a local Sieve script if your provider accepts one. Without Sieve support, your provider cannot run Transiever-generated rules.</p>
         <div class="tool-grid">
           <article class="tool">
-            <p class="tool-meta">Validated</p>
             <h3><a href="https://kb.mailbox.org/en/private/e-mail/can-i-use-sieve-mail-filtering/">mailbox.org</a></h3>
             <p>Validated with mailbox.org and its Open-Xchange rule editor.</p>
           </article>
-
           <article class="tool">
-            <p class="tool-meta">Documented ManageSieve</p>
-            <h3>More providers to try</h3>
-            <p>
-              Also worth trying: <a href="https://migadu.com/">Migadu</a>,
-              <a href="https://purelymail.com/docs/setup/technical">Purelymail</a>, and
-              self-hosted <a href="https://doc.dovecot.org/2.4.0/core/config/sieve/managesieve.html">Dovecot/Pigeonhole</a>.
-            </p>
+            <h3>Other providers</h3>
+            <p><a href="https://migadu.com/">Migadu</a>, <a href="https://purelymail.com/docs/setup/technical">Purelymail</a>, and self-hosted <a href="https://doc.dovecot.org/2.4.0/core/config/sieve/managesieve.html">Dovecot/Pigeonhole</a> are documented candidates to verify with your account.</p>
           </article>
         </div>
-        <p class="note">ManageSieve is the <a href="https://www.rfc-editor.org/info/rfc5804/">RFC 5804</a> protocol for remotely managing Sieve scripts. Sieve support alone does not guarantee ManageSieve; <a href="/transiever/sieve-providers/">check support before you sync</a>.</p>
+        <p class="note"><a href="/transiever/sieve-providers/">Check Sieve and ManageSieve requirements</a> before changing server rules.</p>
       </section>
 
-      <section class="install-section" aria-labelledby="install-heading">
-        <h2 id="install-heading">Install your tools</h2>
-        <div class="install-grid">
-          <div>
-            <h3>Windows with <a href="https://github.com/SeWieland/Transiever.ScoopBucket">Scoop</a></h3>
-            <pre><code class="language-shell"><span class="syntax-command">scoop</span> bucket add <span class="syntax-value">transiever</span> <span class="syntax-value">https://github.com/SeWieland/Transiever.ScoopBucket</span>
-<span class="syntax-command">scoop</span> install <span class="syntax-value">transiever/olrx</span>
-<span class="syntax-command">scoop</span> install <span class="syntax-value">transiever/tbrx</span>
-<span class="syntax-command">scoop</span> install <span class="syntax-value">transiever/srtx</span>
-<span class="syntax-command">scoop</span> install <span class="syntax-value">transiever/msieve</span></code></pre>
-          </div>
-          <div>
-            <h3>Linux x64 with <a href="https://github.com/SeWieland/homebrew-transiever">Homebrew</a></h3>
-            <pre><code class="language-shell"><span class="syntax-command">brew</span> install <span class="syntax-value">SeWieland/transiever/tbrx</span>
-<span class="syntax-command">brew</span> install <span class="syntax-value">SeWieland/transiever/srtx</span>
-<span class="syntax-command">brew</span> install <span class="syntax-value">SeWieland/transiever/msieve</span></code></pre>
-            <p class="note"><code>olrx</code> requires classic Outlook for Windows.</p>
-          </div>
-        </div>
-      </section>
-
-      <section id="dotnet" aria-labelledby="dotnet-heading">
-        <h2 id="dotnet-heading">Use Transiever from .NET</h2>
-        <div class="tool-grid">
-          <article class="tool">
-            <p class="tool-meta">RFC 5804 ManageSieve</p>
-            <h3><a href="/transiever/dotnet-managesieve-client/">ManageSieve library and CLI</a></h3>
-            <p><a href="https://www.nuget.org/packages/Transiever.ManageSieve">Transiever.ManageSieve</a> is the async .NET client library. Install <a href="https://www.nuget.org/packages/Transiever.ManageSieve.Cli">Transiever.ManageSieve.Cli</a> as the <code>msieve</code> global tool.</p>
-          </article>
-          <article class="tool">
-            <p class="tool-meta">Sieve rules and deployment</p>
-            <h3><a href="/transiever/dotnet-sieve-rules/">SieveRuler library and CLI</a></h3>
-            <p><a href="https://www.nuget.org/packages/Transiever.SieveRuler">Transiever.SieveRuler</a> models and renders rules. Install <a href="https://www.nuget.org/packages/Transiever.SieveRuler.Cli">Transiever.SieveRuler.Cli</a> as the <code>srtx</code> global tool.</p>
-          </article>
-        </div>
+      <section aria-labelledby="direct-heading">
+        <h2 id="direct-heading">Already working with Sieve?</h2>
+        <p>Use the <a href="/transiever/managesieve-cli/">msieve command-line quickstart</a> to inspect a server directly, or <a href="/transiever/dotnet-sieve-rules/#cli">generate a script from JSON with srtx</a>.</p>
       </section>
 
       <section class="relationship" aria-labelledby="relationship-heading">
@@ -176,7 +133,7 @@
 
     <footer>
       A personal open-source project by
-      <a href="https://github.com/SeWieland">Sebastian Wieland</a>.
+      <a href="/">Sebastian Wieland</a>.
       <a href="https://github.com/SeWieland/Transiever.SieveRuler/blob/main/LICENSE">MIT licensed</a>.
     </footer>
   </div>

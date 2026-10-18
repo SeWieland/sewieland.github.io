@@ -23,16 +23,16 @@
   <script defer src="/copy-code.js"></script>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
   <div class="page-shell">
     <header class="site-header">
       <a class="wordmark" href="/transiever/">Transiever</a>
       <nav class="site-nav" aria-label="Transiever guides">
-        <a href="/transiever/#workflows">Workflows</a>
+        <a href="/transiever/#workflows">Mail rules</a>
         <a href="/transiever/#dotnet">.NET</a>
         <a href="/transiever/sieve-providers/">Providers</a>
       </nav>
       <div class="header-utilities">
-        <a class="quiet-link" href="/">Sebastian Wieland</a>
         <button class="theme-toggle" type="button" aria-label="Dark mode" aria-pressed="false" hidden>
           <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
             <circle cx="12" cy="12" r="4"></circle>
@@ -45,42 +45,45 @@
       </div>
     </header>
 
-    <main>
+    <main id="main-content" tabindex="-1">
       <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/transiever/">Transiever</a> / ManageSieve CLI</nav>
       <section class="guide-hero" aria-labelledby="hero-heading">
         <h1 id="hero-heading">A command-line client for ManageSieve and Sieve scripts.</h1>
         <p><code>msieve</code> is a policy-neutral CLI for direct <a href="https://www.rfc-editor.org/info/rfc5804/">RFC 5804</a> ManageSieve operations against a compatible mail server.</p>
       </section>
 
+
       <section class="guide-content" aria-labelledby="install-heading">
         <h2 id="install-heading">Install msieve</h2>
-        <pre><code class="language-shell"><span class="syntax-command">dotnet</span> tool install <span class="syntax-flag">--global</span> <span class="syntax-value">Transiever.ManageSieve.Cli</span>
-
-<span class="syntax-comment"># Or install a self-contained build</span>
-<span class="syntax-command">scoop</span> install <span class="syntax-value">transiever/msieve</span>
-<span class="syntax-command">brew</span> install <span class="syntax-value">SeWieland/transiever/msieve</span></code></pre>
-        <p><a href="https://www.nuget.org/packages/Transiever.ManageSieve.Cli">Transiever.ManageSieve.Cli</a> installs as a global .NET tool. Scoop offers Windows builds; Homebrew offers Linux x64 builds.</p>
+        <p>Choose one method. Install the global tool with the .NET 10 SDK, which includes the runtime needed to run it. Scoop and Homebrew install self-contained builds.</p>
+        <h3>.NET tool · PowerShell or Bash</h3>
+        <pre tabindex="0"><code class="language-shell">dotnet tool install --global Transiever.ManageSieve.Cli</code></pre>
+        <h3>Windows · PowerShell with Scoop</h3>
+        <p>Add the <a href="https://github.com/SeWieland/Transiever.ScoopBucket">Transiever bucket</a> once.</p>
+        <pre tabindex="0"><code class="language-powershell">scoop bucket add transiever https://github.com/SeWieland/Transiever.ScoopBucket
+scoop install transiever/msieve</code></pre>
+        <h3>Linux x64 · Bash with Homebrew</h3>
+        <pre tabindex="0"><code class="language-bash">brew install SeWieland/transiever/msieve</code></pre>
       </section>
-
       <section class="guide-content" aria-labelledby="commands-heading">
-        <h2 id="commands-heading">Inspect and manage scripts directly</h2>
-        <pre><code class="language-shell"><span class="syntax-command">msieve</span> capabilities
-<span class="syntax-command">msieve</span> list
-<span class="syntax-command">msieve</span> get active <span class="syntax-flag">--output</span> <span class="syntax-value">active.sieve</span>
-<span class="syntax-command">msieve</span> check <span class="syntax-flag">--file</span> <span class="syntax-value">candidate.sieve</span>
-<span class="syntax-command">msieve</span> put candidate <span class="syntax-flag">--file</span> <span class="syntax-value">candidate.sieve</span> <span class="syntax-flag">--activate</span>
-<span class="syntax-command">msieve</span> deactivate</code></pre>
-        <p>The CLI uses port <code>4190</code> with required STARTTLS by default and refuses plaintext authentication. It does not generate Sieve, reconcile scripts, create backups, or apply provider-specific policy.</p>
+        <h2 id="commands-heading">Inspect your server first</h2>
+        <p>Replace the example host with your provider's ManageSieve endpoint. This command uses required STARTTLS on port 4190 by default, reports capabilities, and does not authenticate or change scripts.</p>
+        <h3>PowerShell or Bash</h3>
+        <pre tabindex="0"><code class="language-shell">msieve capabilities --sieve-host sieve.example.com</code></pre>
+        <p>To list scripts, also replace the username. In an interactive terminal, a missing password is prompted without echoing it. Listing does not change server scripts.</p>
+        <pre tabindex="0"><code class="language-shell">msieve list --sieve-host sieve.example.com --sieve-username user@example.com</code></pre>
+        <p>Use <code>msieve check --file candidate.sieve</code> with your connection options to ask the server to validate a local candidate without uploading or activating it.</p>
+      </section>
+      <section class="guide-content" aria-labelledby="changes-heading">
+        <h2 id="changes-heading">Change scripts deliberately</h2>
+        <p><code>put</code> uploads a script; adding <code>--activate</code> also makes it active. <code>deactivate</code> disables active Sieve processing. These are separate operations, not a sequence to paste after inspection.</p>
+        <p><code>msieve</code> does not generate Sieve, reconcile scripts, or create backups. Use <a href="/transiever/dotnet-sieve-rules/#cli">srtx</a> when you need those workflows.</p>
+        <p>See the <a href="https://github.com/SeWieland/Transiever.ManageSieve/blob/main/src/Transiever.ManageSieve.Cli/README.md">canonical msieve CLI guide</a> for script operations, authentication, and connection options.</p>
       </section>
 
-      <section class="guide-content" aria-labelledby="fit-heading">
-        <h2 id="fit-heading">Use a higher-level workflow when needed</h2>
-        <div class="callout"><p><strong>Use msieve</strong> for direct server operations. Use <a href="/transiever/dotnet-sieve-rules/">srtx and SieveRuler</a> for JSON rules, Sieve generation, preview, reconciliation, deployment plans, and rollback.</p></div>
-        <p>See the <a href="https://github.com/SeWieland/Transiever.ManageSieve">ManageSieve CLI documentation</a> for the full command and configuration reference.</p>
-      </section>
     </main>
 
-    <footer>A personal open-source project by <a href="https://github.com/SeWieland">Sebastian Wieland</a>. <a href="https://github.com/SeWieland/Transiever.SieveRuler/blob/main/LICENSE">MIT licensed</a>.</footer>
+    <footer>A personal open-source project by <a href="/">Sebastian Wieland</a>. <a href="https://github.com/SeWieland/Transiever.SieveRuler/blob/main/LICENSE">MIT licensed</a>.</footer>
   </div>
 </body>
 </html>

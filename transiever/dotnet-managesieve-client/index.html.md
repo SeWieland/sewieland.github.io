@@ -1,17 +1,44 @@
 # ManageSieve client for .NET and C#
 
-`Transiever.ManageSieve` is an async .NET 10 library for direct RFC 5804 ManageSieve operations: list, download, validate, upload, activate, deactivate, and delete server-side Sieve scripts.
+`Transiever.ManageSieve` provides direct RFC 5804 protocol operations.
 
-```text
+## Create an application
+
+Requires the .NET 10 SDK.
+
+```shell
+dotnet new console --framework net10.0 --name ManageSieveQuickstart
+cd ManageSieveQuickstart
 dotnet add package Transiever.ManageSieve
-dotnet tool install --global Transiever.ManageSieve.Cli
 ```
 
-The companion CLI package installs `msieve`.
-The client supports TCP, STARTTLS, implicit TLS, capability-driven SASL authentication, and streaming protocol parsing.
-Automated integration tests exercise supported commands against a pinned Dovecot/Pigeonhole server image.
+Replace `Program.cs` with:
 
-Use this library when the application owns its Sieve policy.
-Use SieveRuler when you also need rule models, generation, reconciliation, and deployment workflows.
+```csharp
+using Transiever.ManageSieve;
 
-See [NuGet](https://www.nuget.org/packages/Transiever.ManageSieve) and [source documentation](https://github.com/SeWieland/Transiever.ManageSieve).
+ManageSieveClientOptions options = new()
+{
+    Host = "sieve.example.com"
+};
+
+await using IManageSieveClient client =
+    new ManageSieveClientFactory().CreateClient(options);
+await client.ConnectAsync();
+await client.StartTlsAsync();
+ManageSieveCapabilities capabilities = await client.RefreshCapabilitiesAsync();
+Console.WriteLine(string.Join(", ", capabilities.SieveExtensions));
+```
+
+Run from the project directory:
+
+```shell
+dotnet run
+```
+
+Replace the host with your provider's ManageSieve endpoint.
+The example uses required STARTTLS on port 4190 and normal platform certificate validation.
+It prints advertised Sieve extensions without authenticating or changing scripts.
+
+See the [library reference](https://github.com/SeWieland/Transiever.ManageSieve/blob/main/src/Transiever.ManageSieve/README.md) and [authentication guide](https://github.com/SeWieland/Transiever.ManageSieve/blob/main/docs/authentication.md) for script operations.
+Use [SieveRuler](https://sewieland.github.io/transiever/dotnet-sieve-rules/) for rule models and deployment policy, or [msieve](https://sewieland.github.io/transiever/managesieve-cli/) for a CLI.
