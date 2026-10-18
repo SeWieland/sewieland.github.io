@@ -57,29 +57,29 @@
         <h2 id="install-heading">Create a .NET 10 console application</h2>
         <p>With the .NET 10 SDK installed, create a new project and add the <a href="https://www.nuget.org/packages/Transiever.ManageSieve">ManageSieve library</a>.</p>
         <h3>PowerShell or Bash</h3>
-        <pre tabindex="0"><code class="language-shell">dotnet new console --framework net10.0 --name ManageSieveQuickstart
-cd ManageSieveQuickstart
-dotnet add package Transiever.ManageSieve</code></pre>
+        <pre tabindex="0"><code class="language-shell"><span class="syntax-command">dotnet</span> <span class="syntax-value">new</span> <span class="syntax-value">console</span> <span class="syntax-flag">--framework</span> <span class="syntax-value">net10.0</span> <span class="syntax-flag">--name</span> <span class="syntax-value">ManageSieveQuickstart</span>
+<span class="syntax-command">cd</span> <span class="syntax-value">ManageSieveQuickstart</span>
+<span class="syntax-command">dotnet</span> <span class="syntax-value">add</span> <span class="syntax-value">package</span> <span class="syntax-value">Transiever.ManageSieve</span></code></pre>
       </section>
       <section class="guide-content" aria-labelledby="use-heading">
         <h2 id="use-heading">Read server capabilities over TLS</h2>
         <p>Replace <code>Program.cs</code> with this example and set the host to your provider's ManageSieve endpoint. It requires STARTTLS on port 4190 by default and uses normal platform certificate validation.</p>
         <h3>C#</h3>
-        <pre tabindex="0"><code class="language-csharp">using Transiever.ManageSieve;
+        <pre tabindex="0"><code class="language-csharp"><span class="syntax-keyword">using</span> Transiever.ManageSieve;
 
-ManageSieveClientOptions options = new()
+<span class="syntax-type">ManageSieveClientOptions</span> options = <span class="syntax-keyword">new</span>()
 {
-    Host = "sieve.example.com"
+    Host = <span class="syntax-string">"sieve.example.com"</span>
 };
 
-await using IManageSieveClient client =
-    new ManageSieveClientFactory().CreateClient(options);
-await client.ConnectAsync();
-await client.StartTlsAsync();
-ManageSieveCapabilities capabilities = await client.RefreshCapabilitiesAsync();
-Console.WriteLine(string.Join(", ", capabilities.SieveExtensions));</code></pre>
+<span class="syntax-keyword">await</span> <span class="syntax-keyword">using</span> <span class="syntax-type">IManageSieveClient</span> client =
+    <span class="syntax-keyword">new</span> <span class="syntax-type">ManageSieveClientFactory</span>().<span class="syntax-method">CreateClient</span>(options);
+<span class="syntax-keyword">await</span> <span class="syntax-method">client.ConnectAsync</span>();
+<span class="syntax-keyword">await</span> <span class="syntax-method">client.StartTlsAsync</span>();
+<span class="syntax-type">ManageSieveCapabilities</span> capabilities = <span class="syntax-keyword">await</span> <span class="syntax-method">client.RefreshCapabilitiesAsync</span>();
+<span class="syntax-method">Console.WriteLine</span>(<span class="syntax-method">string.Join</span>(<span class="syntax-string">", "</span>, capabilities.SieveExtensions));</code></pre>
         <p>Run the application from its project directory.</p>
-        <pre tabindex="0"><code class="language-shell">dotnet run</code></pre>
+        <pre tabindex="0"><code class="language-shell"><span class="syntax-command">dotnet</span> <span class="syntax-value">run</span></code></pre>
         <p>The result lists the server's advertised Sieve extensions. This example does not authenticate or change scripts. An unavailable endpoint, unsupported STARTTLS, or invalid certificate fails the connection.</p>
       </section>
       <section class="guide-content" aria-labelledby="fit-heading">

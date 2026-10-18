@@ -57,21 +57,21 @@
         <h2 id="install-heading">Install msieve</h2>
         <p>Choose one method. Install the global tool with the .NET 10 SDK, which includes the runtime needed to run it. Scoop and Homebrew install self-contained builds.</p>
         <h3>.NET tool · PowerShell or Bash</h3>
-        <pre tabindex="0"><code class="language-shell">dotnet tool install --global Transiever.ManageSieve.Cli</code></pre>
+        <pre tabindex="0"><code class="language-shell"><span class="syntax-command">dotnet</span> <span class="syntax-value">tool</span> <span class="syntax-value">install</span> <span class="syntax-flag">--global</span> <span class="syntax-value">Transiever.ManageSieve.Cli</span></code></pre>
         <h3>Windows · PowerShell with Scoop</h3>
         <p>Add the <a href="https://github.com/SeWieland/Transiever.ScoopBucket">Transiever bucket</a> once.</p>
-        <pre tabindex="0"><code class="language-powershell">scoop bucket add transiever https://github.com/SeWieland/Transiever.ScoopBucket
-scoop install transiever/msieve</code></pre>
+        <pre tabindex="0"><code class="language-powershell"><span class="syntax-command">scoop</span> <span class="syntax-value">bucket</span> <span class="syntax-value">add</span> <span class="syntax-value">transiever</span> <span class="syntax-value">https://github.com/SeWieland/Transiever.ScoopBucket</span>
+<span class="syntax-command">scoop</span> <span class="syntax-value">install</span> <span class="syntax-value">transiever/msieve</span></code></pre>
         <h3>Linux x64 · Bash with Homebrew</h3>
-        <pre tabindex="0"><code class="language-bash">brew install SeWieland/transiever/msieve</code></pre>
+        <pre tabindex="0"><code class="language-bash"><span class="syntax-command">brew</span> <span class="syntax-value">install</span> <span class="syntax-value">SeWieland/transiever/msieve</span></code></pre>
       </section>
       <section class="guide-content" aria-labelledby="commands-heading">
         <h2 id="commands-heading">Inspect your server first</h2>
         <p>Replace the example host with your provider's ManageSieve endpoint. This command uses required STARTTLS on port 4190 by default, reports capabilities, and does not authenticate or change scripts.</p>
         <h3>PowerShell or Bash</h3>
-        <pre tabindex="0"><code class="language-shell">msieve capabilities --sieve-host sieve.example.com</code></pre>
+        <pre tabindex="0"><code class="language-shell"><span class="syntax-command">msieve</span> <span class="syntax-value">capabilities</span> <span class="syntax-flag">--sieve-host</span> <span class="syntax-value">sieve.example.com</span></code></pre>
         <p>To list scripts, also replace the username. In an interactive terminal, a missing password is prompted without echoing it. Listing does not change server scripts.</p>
-        <pre tabindex="0"><code class="language-shell">msieve list --sieve-host sieve.example.com --sieve-username user@example.com</code></pre>
+        <pre tabindex="0"><code class="language-shell"><span class="syntax-command">msieve</span> <span class="syntax-value">list</span> <span class="syntax-flag">--sieve-host</span> <span class="syntax-value">sieve.example.com</span> <span class="syntax-flag">--sieve-username</span> <span class="syntax-value">user</span>@<span class="syntax-value">example.com</span></code></pre>
         <p>Use <code>msieve check --file candidate.sieve</code> with your connection options to ask the server to validate a local candidate without uploading or activating it.</p>
       </section>
       <section class="guide-content" aria-labelledby="changes-heading">

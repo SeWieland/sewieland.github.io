@@ -5,23 +5,13 @@
     "ignoreFiles": [],
     "ignoreValues": [
       {
-        "rule": "side-tab",
+        "rule": "em-dash-overuse",
         "value": "*",
         "files": [
-          "styles.css"
+          "transiever/thunderbird-filters-to-sieve/index.html"
         ],
-        "createdAt": "2026-10-18T20:28:09.036Z",
-        "reason": "Agent: baseline b736756 styles intentionally mark safety callouts and the shared sync pipeline; retained as incumbent design during the scoped refinement."
-      },
-      {
-        "rule": "side-tab",
-        "value": "*",
-        "files": [
-          "transiever/dotnet-sieve-rules/index.html",
-          "transiever/managesieve-cli/index.html"
-        ],
-        "createdAt": "2026-10-18T20:28:09.649Z",
-        "reason": "Agent verified false positive: neither guide contains pipeline-core or callout markup; the detector attributes an unused shared CSS pipeline stripe to these pages."
+        "createdAt": "2026-10-18T20:45:03.806Z",
+        "reason": "Agent verified false positive: all 13 counted double hyphens are literal CLI option prefixes inside code examples; the page has no prose em dashes and commands must retain their exact syntax."
       }
     ]
   }

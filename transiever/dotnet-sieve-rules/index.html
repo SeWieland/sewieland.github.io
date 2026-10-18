@@ -57,40 +57,40 @@
         <h2 id="install-heading">Create a .NET 10 console application</h2>
         <p>With the .NET 10 SDK installed, create a new project and add the <a href="https://www.nuget.org/packages/Transiever.SieveRuler">SieveRuler library</a>.</p>
         <h3>PowerShell or Bash</h3>
-        <pre tabindex="0"><code class="language-shell">dotnet new console --framework net10.0 --name SieveRulerQuickstart
-cd SieveRulerQuickstart
-dotnet add package Transiever.SieveRuler</code></pre>
+        <pre tabindex="0"><code class="language-shell"><span class="syntax-command">dotnet</span> <span class="syntax-value">new</span> <span class="syntax-value">console</span> <span class="syntax-flag">--framework</span> <span class="syntax-value">net10.0</span> <span class="syntax-flag">--name</span> <span class="syntax-value">SieveRulerQuickstart</span>
+<span class="syntax-command">cd</span> <span class="syntax-value">SieveRulerQuickstart</span>
+<span class="syntax-command">dotnet</span> <span class="syntax-value">add</span> <span class="syntax-value">package</span> <span class="syntax-value">Transiever.SieveRuler</span></code></pre>
       </section>
       <section class="guide-content" aria-labelledby="workflow-heading">
         <h2 id="workflow-heading">Generate Sieve locally</h2>
         <p>Replace <code>Program.cs</code> with this example. It defines a subject filter and renders a Sieve script in memory.</p>
         <h3>C#</h3>
-        <pre tabindex="0"><code class="language-csharp">using Transiever.SieveRuler.Models;
-using Transiever.SieveRuler.Services;
+        <pre tabindex="0"><code class="language-csharp"><span class="syntax-keyword">using</span> Transiever.SieveRuler.Models;
+<span class="syntax-keyword">using</span> Transiever.SieveRuler.Services;
 
-RuleDefinition rule = new()
+<span class="syntax-type">RuleDefinition</span> rule = <span class="syntax-keyword">new</span>()
 {
-    Name = "Newsletters",
-    TargetFolder = "INBOX/Newsletters",
+    Name = <span class="syntax-string">"Newsletters"</span>,
+    TargetFolder = <span class="syntax-string">"INBOX/Newsletters"</span>,
     Conditions =
     [
-        new() { Type = RuleConditionType.SubjectContains, Values = ["newsletter"] }
+        <span class="syntax-keyword">new</span>() { Type = <span class="syntax-type">RuleConditionType.SubjectContains</span>, Values = [<span class="syntax-string">"newsletter"</span>] }
     ]
 };
 
-string sieve = new SieveGenerator().Generate([rule]);
-Console.WriteLine(sieve);</code></pre>
+<span class="syntax-keyword">string</span> sieve = <span class="syntax-keyword">new</span> <span class="syntax-type">SieveGenerator</span>().<span class="syntax-method">Generate</span>([rule]);
+<span class="syntax-method">Console.WriteLine</span>(sieve);</code></pre>
         <p>Run the application from its project directory.</p>
-        <pre tabindex="0"><code class="language-shell">dotnet run</code></pre>
+        <pre tabindex="0"><code class="language-shell"><span class="syntax-command">dotnet</span> <span class="syntax-value">run</span></code></pre>
         <p>The result prints a script with a subject test and a <code>fileinto</code> action. No server connection or credentials are needed. Before deployment, adjust the example folder to your provider's naming and check support for the <code>fileinto</code> extension.</p>
       </section>
       <section class="guide-content" id="cli" aria-labelledby="cli-heading">
         <h2 id="cli-heading">Generate from JSON with srtx</h2>
         <p>For an existing rules document, use the <a href="https://www.nuget.org/packages/Transiever.SieveRuler.Cli">srtx global tool</a> instead of writing application code. This alternative requires .NET 10. Obtain a document from an <a href="/transiever/outlook-rules-to-sieve/">Outlook export</a>, a <a href="/transiever/thunderbird-filters-to-sieve/">Thunderbird export</a>, or the <a href="https://github.com/SeWieland/Transiever.SieveRuler/blob/main/schemas/sieveruler.rules.schema.json">v1 rules schema</a>. Save a copy as <code>rules.json</code> in a new working directory before running these commands.</p>
         <h3>PowerShell or Bash</h3>
-        <pre tabindex="0"><code class="language-shell">dotnet tool install --global Transiever.SieveRuler.Cli
-srtx inspect --rules rules.json
-srtx generate --rules rules.json --sieve rules.sieve</code></pre>
+        <pre tabindex="0"><code class="language-shell"><span class="syntax-command">dotnet</span> <span class="syntax-value">tool</span> <span class="syntax-value">install</span> <span class="syntax-flag">--global</span> <span class="syntax-value">Transiever.SieveRuler.Cli</span>
+<span class="syntax-command">srtx</span> <span class="syntax-value">inspect</span> <span class="syntax-flag">--rules</span> <span class="syntax-value">rules.json</span>
+<span class="syntax-command">srtx</span> <span class="syntax-value">generate</span> <span class="syntax-flag">--rules</span> <span class="syntax-value">rules.json</span> <span class="syntax-flag">--sieve</span> <span class="syntax-value">rules.sieve</span></code></pre>
         <p>This writes <code>rules.sieve</code> locally and does not change server rules. Self-contained Windows and Linux x64 builds are also available through <a href="https://github.com/SeWieland/Transiever.ScoopBucket">Scoop</a> and <a href="https://github.com/SeWieland/homebrew-transiever">Homebrew</a>.</p>
       </section>
       <section class="guide-content" aria-labelledby="fit-heading">

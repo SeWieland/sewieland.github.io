@@ -62,27 +62,27 @@
         <h2 id="install-heading">Install on Windows</h2>
         <p>With Scoop already installed, add the <a href="https://github.com/SeWieland/Transiever.ScoopBucket">Transiever bucket</a> once. Install <code>olrx</code> for Outlook export and <code>srtx</code> for local Sieve generation.</p>
         <h3>PowerShell</h3>
-        <pre tabindex="0"><code class="language-powershell">scoop bucket add transiever https://github.com/SeWieland/Transiever.ScoopBucket
-scoop install transiever/olrx
-scoop install transiever/srtx</code></pre>
+        <pre tabindex="0"><code class="language-powershell"><span class="syntax-command">scoop</span> <span class="syntax-value">bucket</span> <span class="syntax-value">add</span> <span class="syntax-value">transiever</span> <span class="syntax-value">https://github.com/SeWieland/Transiever.ScoopBucket</span>
+<span class="syntax-command">scoop</span> <span class="syntax-value">install</span> <span class="syntax-value">transiever/olrx</span>
+<span class="syntax-command">scoop</span> <span class="syntax-value">install</span> <span class="syntax-value">transiever/srtx</span></code></pre>
       </section>
       <section class="guide-content" aria-labelledby="export-heading">
         <h2 id="export-heading">Export a local Sieve script</h2>
         <p>Use a new working directory so you do not overwrite earlier exports. These commands read Outlook rules and write local files; they do not change your mail server.</p>
         <h3>PowerShell</h3>
-        <pre tabindex="0"><code class="language-powershell">olrx export --rules outlook-rules.json
-srtx generate --rules outlook-rules.json --sieve outlook.sieve</code></pre>
+        <pre tabindex="0"><code class="language-powershell"><span class="syntax-command">olrx</span> <span class="syntax-value">export</span> <span class="syntax-flag">--rules</span> <span class="syntax-value">outlook-rules.json</span>
+<span class="syntax-command">srtx</span> <span class="syntax-value">generate</span> <span class="syntax-flag">--rules</span> <span class="syntax-value">outlook-rules.json</span> <span class="syntax-flag">--sieve</span> <span class="syntax-value">outlook.sieve</span></code></pre>
         <p>The result is <code>outlook-rules.json</code> and <code>outlook.sieve</code>. Review export diagnostics and folder names in the generated script before using it with your provider.</p>
       </section>
       <section class="guide-content" aria-labelledby="start-heading">
         <h2 id="start-heading">Preview a server sync</h2>
         <p>For a <a href="/transiever/sieve-providers/">ManageSieve-capable provider</a>, replace the example host and username below. In an interactive terminal, the tool prompts for a missing password without echoing it. The dry run does not write files or change server rules.</p>
         <h3>PowerShell</h3>
-        <pre tabindex="0"><code class="language-powershell">$env:TRANSIEVER_SIEVE_HOST = "sieve.example.com"
-$env:TRANSIEVER_SIEVE_USERNAME = "user@example.com"
-olrx run --no-optimize --dry-run</code></pre>
+        <pre tabindex="0"><code class="language-powershell"><span class="syntax-variable">$env:TRANSIEVER_SIEVE_HOST</span> = <span class="syntax-string">"sieve.example.com"</span>
+<span class="syntax-variable">$env:TRANSIEVER_SIEVE_USERNAME</span> = <span class="syntax-string">"user@example.com"</span>
+<span class="syntax-command">olrx</span> <span class="syntax-value">run</span> <span class="syntax-flag">--no-optimize</span> <span class="syntax-flag">--dry-run</span></code></pre>
         <p>After reviewing the preview, run the guided workflow separately. It asks before deployment and creates a server-side backup when replacing the active script.</p>
-        <pre tabindex="0"><code class="language-powershell">olrx run --no-optimize</code></pre>
+        <pre tabindex="0"><code class="language-powershell"><span class="syntax-command">olrx</span> <span class="syntax-value">run</span> <span class="syntax-flag">--no-optimize</span></code></pre>
         <p>See the <a href="https://github.com/SeWieland/Transiever.OutlookResiever/blob/main/src/Transiever.OutlookResiever.Cli/README.md">olrx CLI guide</a> for authentication options, rollback, and workflow details, and the <a href="https://github.com/SeWieland/Transiever.OutlookResiever/blob/main/docs/outlook-export.md">Outlook mapping guide</a> for supported rules.</p>
       </section>
 

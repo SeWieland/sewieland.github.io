@@ -48,14 +48,14 @@
     <main id="main-content" tabindex="-1">
 
       <section class="hero" aria-labelledby="hero-heading">
-        <h1 id="hero-heading">Mail rules on your server. Sieve tools in your code.</h1>
+        <h1 id="hero-heading">Mail rules on your server. <em>Sieve tools in your code.</em></h1>
         <p>Move supported Outlook and Thunderbird filters to server-side Sieve, or build Sieve and ManageSieve into your .NET application.</p>
       </section>
 
       <div class="audience-grid">
         <section class="audience-path" id="workflows" aria-labelledby="workflows-heading">
           <h2 id="workflows-heading">Move your mail rules</h2>
-          <p>Keep supported filters working when your mail client is closed. Start with a local export, then review before you sync.</p>
+          <p>Give your mail client the evening off. Move supported filters to the server, starting with a local export and a review before you sync.</p>
           <ul class="path-links">
             <li><a href="/transiever/outlook-rules-to-sieve/">Start with classic Outlook</a><p><code>olrx</code> requires configured classic Outlook on Windows x64.</p></li>
             <li><a href="/transiever/thunderbird-filters-to-sieve/">Start with Thunderbird</a><p>The read-only <code>tbrx</code> beta supports Windows x64 and Linux x64.</p></li>
@@ -63,7 +63,7 @@
         </section>
         <section class="audience-path" id="dotnet" aria-labelledby="dotnet-heading">
           <h2 id="dotnet-heading">Build with .NET</h2>
-          <p>Choose the layer your application needs. Both libraries target .NET 10 and have a short C# quickstart.</p>
+          <p>Take the part that fits your code. Both .NET 10 libraries have a short C# quickstart to get you going.</p>
           <ul class="path-links">
             <li><a href="/transiever/dotnet-sieve-rules/">Generate Sieve with SieveRuler</a><p>Model rules, render scripts, and add reconciliation and deployment workflows.</p></li>
             <li><a href="/transiever/dotnet-managesieve-client/">Connect with ManageSieve</a><p>Use direct RFC 5804 protocol operations when your application owns the policy.</p></li>
@@ -97,25 +97,20 @@
         <h2 id="relationship-heading">How server sync works</h2>
         <div class="pipeline">
           <div class="pipeline-stage">
-            <p class="pipeline-label">Rule sources</p>
-            <div class="pipeline-options">
-              <div class="flow-node"><strong>Classic Outlook</strong><code>olrx</code></div>
-              <div class="flow-node"><strong>Thunderbird</strong><code>tbrx</code></div>
-            </div>
+            <h3>From your mail client</h3>
+            <p>Classic Outlook · <code>olrx</code></p>
+            <p>Thunderbird · <code>tbrx</code></p>
           </div>
-          <span class="flow-arrow" aria-hidden="true">→</span>
-          <div class="pipeline-stage flow-node pipeline-core">
-            <p class="pipeline-label">Shared sync pipeline</p>
-            <strong>SieveRuler</strong>
-            <span>Reconcile · preview · backup · rollback</span>
-            <strong>ManageSieve</strong>
-            <span>Provider-neutral server connection</span>
+          <svg class="flow-arrow" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16m-6-6 6 6-6 6"></path></svg>
+          <div class="pipeline-stage">
+            <h3>Through the shared tools</h3>
+            <p><strong>SieveRuler</strong><br>Reconcile, preview, back up, and roll back.</p>
+            <p><strong>ManageSieve</strong><br>Connect to a compatible server.</p>
           </div>
-          <span class="flow-arrow" aria-hidden="true">→</span>
-          <div class="pipeline-stage flow-node">
-            <p class="pipeline-label">Your provider</p>
-            <strong>Mail server</strong>
-            <span>Server-side Sieve rules</span>
+          <svg class="flow-arrow" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16m-6-6 6 6-6 6"></path></svg>
+          <div class="pipeline-stage">
+            <h3>On your mail server</h3>
+            <p>Sieve applies the rules before mail reaches your devices.</p>
           </div>
         </div>
         <p>
@@ -123,11 +118,10 @@
         </p>
       </section>
 
-      <section class="callout" aria-labelledby="ai-usage-heading">
-        <h2 id="ai-usage-heading">AI usage</h2>
-        <p>Transiever is a personal hobby project created to solve practical problems I have encountered myself.</p>
-        <p>AI is used heavily throughout its development. It supports research, design exploration, implementation, debugging, and documentation.</p>
-        <p>The project is developed using test-driven development and reviewed by a human, me. Its direction, behavior, and quality remain guided by the problems it is intended to solve.</p>
+      <section class="project-note" aria-labelledby="ai-usage-heading">
+        <h2 id="ai-usage-heading">A small project, with a human behind it.</h2>
+        <p>Transiever started with practical mail problems I wanted to solve for myself. It is still a personal hobby project, shaped by those problems.</p>
+        <p>I use AI heavily for research, design exploration, implementation, debugging, and documentation. I develop the project using test-driven development and review the work myself. Its direction, behavior, and quality remain my responsibility.</p>
       </section>
     </main>
 

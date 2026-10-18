@@ -63,6 +63,7 @@ Core content and navigation must remain usable without JavaScript.
 ## Brand Commitments
 
 Transiever is Sebastian Wieland's personal open-source hobby project.
+Use a lightly personal, practical voice, with a little warmth in introductory copy and precise language for instructions and safety limits.
 Preserve its factual disclosure of AI-assisted development and human review.
 Do not imply commercial support, broader compatibility, or validation that the project cannot substantiate.
 

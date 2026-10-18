@@ -7,6 +7,9 @@
   --accent: #126a73;
   --border: #e0e5e3;
   --code-surface: #eef3f1;
+  --syntax-warm: #805117;
+  --syntax-value: #435a5f;
+  --syntax-purple: #7a3f6f;
   --surface-shadow: 0 1px 2px rgb(29 41 45 / 0.05);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
@@ -20,6 +23,9 @@
   --accent: #82b7d3;
   --border: #41494f;
   --code-surface: #121617;
+  --syntax-warm: #efc380;
+  --syntax-value: #a8c9d7;
+  --syntax-purple: #dcb5d0;
   --surface-shadow: 0 1px 2px rgb(0 0 0 / 0.28);
 }
 
@@ -33,6 +39,9 @@
     --accent: #82b7d3;
     --border: #41494f;
     --code-surface: #121617;
+    --syntax-warm: #efc380;
+    --syntax-value: #a8c9d7;
+    --syntax-purple: #dcb5d0;
     --surface-shadow: 0 1px 2px rgb(0 0 0 / 0.28);
   }
 }
@@ -109,6 +118,27 @@ h3 {
 code {
   font-family: ui-monospace, "Cascadia Code", "Segoe UI Mono", monospace;
   font-size: 0.92em;
+}
+
+.syntax-command,
+.syntax-method {
+  color: var(--accent);
+  font-weight: 650;
+}
+
+.syntax-keyword,
+.syntax-flag,
+.syntax-string {
+  color: var(--syntax-warm);
+}
+
+.syntax-value {
+  color: var(--syntax-value);
+}
+
+.syntax-type,
+.syntax-variable {
+  color: var(--syntax-purple);
 }
 
 .home {
@@ -298,6 +328,13 @@ code {
   text-wrap: balance;
 }
 
+.hero h1 em {
+  display: block;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  letter-spacing: -0.025em;
+}
+
 .hero p {
   max-width: 42rem;
   margin-bottom: 0;
@@ -331,7 +368,7 @@ main > section:not(.hero):not(.guide-hero) {
 }
 
 .path-links li {
-  padding-block: 0.75rem;
+  padding: 0.75rem 0;
   border-top: 1px solid var(--border);
 }
 
@@ -360,10 +397,8 @@ main > section:not(.hero):not(.guide-hero) {
 }
 
 .guide-card {
-  padding: 1.5rem;
-  background: var(--surface);
-  box-shadow: var(--surface-shadow);
-  border-radius: 0.75rem;
+  padding-block: 1.25rem;
+  border-top: 1px solid var(--border);
 }
 
 .guide-card p:last-child {
@@ -418,11 +453,14 @@ main > section:not(.hero):not(.guide-hero) {
 }
 
 .callout {
-  padding: 1.25rem;
-  background: var(--surface);
-  border-left: 3px solid var(--accent);
-  box-shadow: var(--surface-shadow);
-  border-radius: 0.75rem;
+  margin-top: 1.25rem;
+  padding: 1.25rem 0;
+  border-block: 1px solid var(--border);
+}
+
+.callout strong {
+  display: block;
+  margin-bottom: 0.35rem;
 }
 
 .callout p:last-child {
@@ -430,10 +468,8 @@ main > section:not(.hero):not(.guide-hero) {
 }
 
 .tool {
-  padding: 1.5rem;
-  background: var(--surface);
-  box-shadow: var(--surface-shadow);
-  border-radius: 0.75rem;
+  padding-block: 1.25rem;
+  border-top: 1px solid var(--border);
 }
 
 .tool p:last-child {
@@ -575,64 +611,52 @@ pre.copy-enabled {
   grid-template-columns: minmax(0, 1.3fr) auto minmax(0, 1.4fr) auto minmax(0, 1fr);
   align-items: start;
   gap: 1rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
-.pipeline > .flow-node {
-  margin-top: 1.7rem;
-}
-
-.pipeline-options,
-.flow-node {
-  display: grid;
-  gap: 0.4rem;
-}
-
-.flow-node {
+.pipeline-stage {
   min-width: 0;
-  padding: 1.25rem;
-  background: var(--surface);
-  box-shadow: var(--surface-shadow);
-  border-radius: 0.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
 }
 
-.pipeline-core {
-  box-shadow: inset 3px 0 0 var(--accent), var(--surface-shadow);
+.pipeline-stage h3 {
+  font-size: 1rem;
 }
 
-.pipeline-core strong:not(:first-of-type) {
+.pipeline-stage p {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.pipeline-stage p + p {
   margin-top: 0.75rem;
 }
 
-.pipeline-label {
-  margin-bottom: 0.65rem;
-  color: var(--muted);
-  font-size: 0.76rem;
-  font-weight: 650;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.flow-node .pipeline-label {
-  margin-bottom: 0.35rem;
-}
-
-.flow-node span {
-  color: var(--muted);
-  font-size: 0.9rem;
-}
-
 .flow-arrow {
-  align-self: center;
-  color: var(--accent);
-  font-size: 1.5rem;
-  font-weight: 700;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-top: 1.1rem;
+  color: var(--muted);
 }
 
 .relationship > p:last-child {
   max-width: 45rem;
   margin-bottom: 0;
   color: var(--muted);
+}
+
+.project-note {
+  max-width: 46rem;
+  padding: 2.5rem 0;
+  border-top: 1px solid var(--border);
+}
+
+.project-note h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.75rem;
+  font-weight: 400;
 }
 
 footer {
@@ -656,16 +680,9 @@ footer {
     grid-template-columns: 1fr;
   }
 
-  .pipeline > .flow-node {
-    margin-top: 0;
-  }
-
-  .pipeline-options {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .flow-arrow {
     justify-self: center;
+    margin-top: 0;
     transform: rotate(90deg);
   }
 }
@@ -696,9 +713,5 @@ footer {
   .home-theme-toggle {
     top: 0.75rem;
     right: 0.75rem;
-  }
-
-  .pipeline-options {
-    grid-template-columns: 1fr;
   }
 }
